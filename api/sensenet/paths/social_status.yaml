@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Social Sharing
+  summary: Get social media connection status
+  description: >
+    Get connection status for all social media platforms. Returns status for all profiles  by default, or filter by specific profileId using query parameter. This allows easy  retrieval of social connection statuses across profiles.
+
+  operationId: socialStatus
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: query
+      description: Optional profile ID to filter social connection status for a specific profile
+      required: false
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Social media connection status retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SocialStatusResponse.yaml

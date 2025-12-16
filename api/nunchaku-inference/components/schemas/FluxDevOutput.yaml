@@ -1,0 +1,19 @@
+type: object
+required:
+  - images
+properties:
+  images:
+    type: array
+    items:
+      $ref: ./ImageOutput.yaml
+  seed:
+    type: integer
+    description: Seed used for generation
+  has_nsfw_concepts:
+    type: array
+    items:
+      type: boolean
+    description: NSFW detection results for each image
+  prompt:
+    type: string
+    description: The prompt used for generation

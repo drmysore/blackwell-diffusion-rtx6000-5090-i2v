@@ -1,0 +1,77 @@
+post:
+  tags:
+    - Posts
+  summary: Publish a social media post
+  description: >
+    Publish content to one or multiple social networks simultaneously.
+
+    Supports immediate posting, scheduling, auto-reposting, and approval workflows.
+
+  operationId: createPost
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreatePostRequest.yaml
+  responses:
+    '200':
+      description: Post successfully created or scheduled
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '429':
+      $ref: ../components/responses/RateLimited.yaml
+get:
+  tags:
+    - Posts
+  summary: Get post details by ID
+  description: Retrieve details about a specific post
+  operationId: getPost
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Social sharing post ID
+  responses:
+    '200':
+      description: Post details retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostDetails.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+patch:
+  tags:
+    - Posts
+  summary: Update a post
+  description: Update post properties including approval status and notes
+  operationId: updatePost
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdatePostRequest.yaml
+  responses:
+    '200':
+      description: Post updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml

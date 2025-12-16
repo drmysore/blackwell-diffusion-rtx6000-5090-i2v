@@ -1,0 +1,66 @@
+get:
+  tags:
+    - Social Sharing
+  summary: Get social analytics
+  description: >
+    Retrieve social media analytics and statistics. Returns analytics for all profiles  by default, or filter by specific profileId using query parameter. This allows easy  retrieval of social analytics across profiles.
+
+  operationId: getSocialStats
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: query
+      description: Optional profile ID to filter social analytics for a specific profile
+      required: false
+      schema:
+        type: string
+        format: uuid
+    - name: period
+      in: query
+      description: The time period to retrieve statistics for
+      schema:
+        type: string
+        enum:
+          - day
+          - week
+          - month
+          - year
+        default: week
+  responses:
+    '200':
+      description: Social statistics
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SocialStats.yaml
+          examples:
+            example1:
+              summary: Example response for social statistics
+              value:
+                profileId: "123e4567-e89b-12d3-a456-426614174000"
+                period: "week"
+                totalFollowers: 1500
+                totalPosts: 45
+                totalEngagements: 300
+                platforms:
+                  instagram:
+                    followers: 800
+                    posts: 20
+                    engagements: 180
+                  twitter:
+                    followers: 500
+                    posts: 15
+                    engagements: 90
+                  tiktok:
+                    followers: 200
+                    posts: 10
+                    engagements: 30
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

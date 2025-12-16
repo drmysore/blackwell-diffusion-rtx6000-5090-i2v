@@ -1,0 +1,26 @@
+type: object
+properties:
+  contentId:
+    type: string
+    format: uuid
+    example: "c0nt3nt-1111-2222-3333-444444444444"
+    description: Unique ID linking all generated posts
+  drafts:
+    type: array
+    items:
+      $ref: ./PlatformPost.yaml
+    description: Generated draft posts for each platform
+  generationSettings:
+    type: object
+    properties:
+      prompt:
+        type: string
+      platforms:
+        type: array
+        items:
+          $ref: ./SocialPlatform.yaml
+      characterId:
+        type: string
+        format: uuid
+    description: Settings used for content generation
+required: [contentId, drafts]

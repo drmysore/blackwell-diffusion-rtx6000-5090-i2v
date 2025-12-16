@@ -1,0 +1,45 @@
+post:
+  tags:
+    - headshots
+  summary: Generate character headshots
+  description: |
+    Generate initial character headshots using optimized prompts.
+
+    **Input**: Optimized prompt from prompt generation service
+    **Model**: flux-dev (high quality, no reference needed)
+    **LoRAs**: AntiBlur for quality enhancement
+  operationId: generateHeadshots
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/HeadshotGenerationRequest.yaml
+  callbacks:
+    onCompletion:
+      '{$request.body#/webhook_url}':
+        post:
+          tags:
+            - headshots
+          summary: Headshot generation webhook
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/HeadshotGenerationResult.yaml
+          responses:
+            '200':
+              description: Webhook received successfully
+            '400':
+              description: Invalid webhook payload
+  responses:
+    '202':
+      description: Headshot generation job started
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

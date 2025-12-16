@@ -1,0 +1,131 @@
+get:
+  tags:
+    - Content
+  summary: List Content Sessions
+  description: Get paginated list of content generation sessions
+  operationId: listContentSessions
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: query
+      description: Filter by profile ID
+      required: false
+      schema:
+        type: string
+        format: uuid
+    - name: page
+      in: query
+      description: Page number (1-based)
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: limit
+      in: query
+      description: Number of sessions per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  responses:
+    '200':
+      description: Sessions retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              sessions:
+                type: array
+                items:
+                  $ref: ../components/schemas/ContentSession.yaml
+              pagination:
+                $ref: ../components/schemas/Pagination.yaml
+            required: [sessions, pagination]
+          examples:
+            simplified_sessions:
+              summary: List of content sessions
+              value:
+                sessions:
+                  - id: "sess-1111-2222-3333-444444444444"
+                    profileId: "123e4567-e89b-12d3-a456-426614174000"
+                    start:
+                      profileId: "123e4567-e89b-12d3-a456-426614174000"
+                    createdAt: "2024-01-15T10:30:00Z"
+                    updatedAt: "2024-01-15T11:45:00Z"
+                    messageCount: 5
+                  - id: "sess-2222-3333-4444-555555555555"
+                    profileId: "456e7890-e89b-12d3-a456-426614174001"
+                    start:
+                      profileId: "456e7890-e89b-12d3-a456-426614174001"
+                      assetId: "789e1234-e89b-12d3-a456-426614174002"
+                    createdAt: "2024-01-14T09:15:00Z"
+                    updatedAt: "2024-01-14T10:30:00Z"
+                    messageCount: 3
+                pagination:
+                  page: 1
+                  limit: 20
+                  total: 25
+                  totalPages: 2
+                  hasMore: true
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+post:
+  tags:
+    - Content
+  summary: Create Content Session
+  description: Create a new content generation session for a profile
+  operationId: createContentSession
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SessionStart.yaml
+        examples:
+          basic_session:
+            summary: Basic content session without image
+            value:
+              profileId: "123e4567-e89b-12d3-a456-426614174000"
+          session_with_image:
+            summary: Content session with reference image
+            value:
+              profileId: "123e4567-e89b-12d3-a456-426614174000"
+              assetId: "456e7890-e89b-12d3-a456-426614174001"
+  responses:
+    '201':
+      description: Session created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ContentSession.yaml
+          examples:
+            created_session:
+              summary: Newly created session
+              value:
+                id: "sess-1111-2222-3333-444444444444"
+                profileId: "123e4567-e89b-12d3-a456-426614174000"
+                start:
+                  profileId: "123e4567-e89b-12d3-a456-426614174000"
+                  assetId: "456e7890-e89b-12d3-a456-426614174001"
+                createdAt: "2024-01-15T10:30:00Z"
+                updatedAt: "2024-01-15T10:30:00Z"
+                messageCount: 0
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

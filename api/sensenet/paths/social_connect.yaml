@@ -1,0 +1,35 @@
+post:
+  tags:
+    - Social Sharing
+  summary: Create Social Media Connection
+  description: Returns URL that takes you to social linking page to connect to different social media platforms for a specific profile
+  operationId: socialConnect
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            profileId:
+              type: string
+              format: uuid
+              description: ID of the profile to connect social accounts to
+              example: "123e4567-e89b-12d3-a456-426614174000"
+          required:
+            - profileId
+  responses:
+    '200':
+      description: Social connection URLs generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SocialConnectResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml

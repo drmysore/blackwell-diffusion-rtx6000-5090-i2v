@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Analytics
+  summary: Get social account analytics
+  description: Retrieve account-level metrics and demographics
+  operationId: getSocialAnalytics
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: platforms
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          $ref: ../components/schemas/Platform.yaml
+      style: form
+      explode: false
+      description: Platforms to get analytics for
+  responses:
+    '200':
+      description: Social analytics retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SocialAnalytics.yaml

@@ -1,0 +1,13 @@
+type: object
+required:
+  - prompt
+  - version
+properties:
+  prompt:
+    type: string
+    minLength: 10
+  version:
+    type: string
+  changelog:
+    type: string
+    description: Description of changes

@@ -1,0 +1,9 @@
+description: Access forbidden
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    example:
+      error: FORBIDDEN
+      message: You don't have permission to access this resource
+      timestamp: '2024-01-01T00:00:00Z'

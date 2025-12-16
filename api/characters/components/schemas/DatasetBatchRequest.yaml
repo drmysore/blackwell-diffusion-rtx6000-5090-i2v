@@ -1,0 +1,21 @@
+type: object
+required:
+  - character_attributes
+  - reference_image_url
+properties:
+  character_attributes:
+    $ref: ./CharacterAttributes.yaml
+  reference_image_url:
+    type: string
+    format: uri
+    description: Reference image from headshot service
+  dataset_size:
+    type: integer
+    minimum: 10
+    maximum: 50
+    default: 18
+  generation_settings:
+    $ref: ./FluxGenerationSettings.yaml
+  webhook_url:
+    type: string
+    format: uri

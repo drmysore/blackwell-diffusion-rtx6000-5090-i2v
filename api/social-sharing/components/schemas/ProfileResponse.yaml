@@ -1,0 +1,15 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  title:
+    type: string
+  refId:
+    type: string
+    description: Reference ID for the profile
+  profileKey:
+    type: string
+    description: Unique profile key (store securely)

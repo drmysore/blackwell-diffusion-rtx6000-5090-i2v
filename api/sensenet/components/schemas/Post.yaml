@@ -1,0 +1,57 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Unique post identifier
+  profileId:
+    type: string
+    format: uuid
+    description: Profile that created this post
+  caption:
+    type: string
+    description: Text content/caption for the post
+  status:
+    type: string
+    enum: ["draft", "scheduled", "publishing", "published", "failed", "cancelled"]
+    description: Current status of the post in its lifecycle
+  scheduledFor:
+    type: string
+    format: date-time
+    nullable: true
+    description: When the post is scheduled to be published (if scheduled)
+  publishedAt:
+    type: string
+    format: date-time
+    nullable: true
+    description: When the post was actually published
+  errorMessage:
+    type: string
+    nullable: true
+    description: Error message if post failed
+  createdAt:
+    type: string
+    format: date-time
+    description: When the post was created
+  updatedAt:
+    type: string
+    format: date-time
+    description: When the post was last updated
+  assets:
+    type: array
+    items:
+      $ref: ./PostAsset.yaml
+    description: Content assets associated with this post
+  likesCount:
+    type: integer
+    description: Total number of likes on this post
+    default: 0
+required:
+  - id
+  - profileId
+  - caption
+  - status
+  - createdAt
+  - updatedAt
+  - assets
+  - likesCount

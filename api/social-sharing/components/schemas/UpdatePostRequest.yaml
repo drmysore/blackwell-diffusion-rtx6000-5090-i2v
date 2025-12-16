@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: string
+    description: Social sharing post ID
+  approved:
+    type: boolean
+    description: Approval status for posts with approval workflow
+  notes:
+    type: string
+    description: Update internal notes
+  disableComments:
+    type: boolean
+    description: Enable/disable comments

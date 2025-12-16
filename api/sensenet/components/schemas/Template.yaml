@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  category:
+    type: string
+  prompt:
+    type: string
+  exampleOutput:
+    type: string
+  usageCount:
+    type: integer
+  trending:
+    type: boolean

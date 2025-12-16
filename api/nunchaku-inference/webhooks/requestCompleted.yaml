@@ -1,0 +1,42 @@
+post:
+  operationId: webhookCallback
+  summary: Webhook called when request is completed
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - request_id
+            - gateway_request_id
+            - status
+          properties:
+            request_id:
+              type: string
+              format: uuid
+              description: Original request ID
+            gateway_request_id:
+              type: string
+              format: uuid
+              description: Gateway request ID (may differ if retried)
+            status:
+              type: string
+              enum:
+                - SUCCESS
+                - ERROR
+              description: Request completion status
+            payload:
+              type: object
+              description: Result payload (when status is SUCCESS)
+            error:
+              type: object
+              description: Error details (when status is ERROR)
+              properties:
+                message:
+                  type: string
+                code:
+                  type: string
+  responses:
+    '200':
+      description: Webhook successfully processed

@@ -1,0 +1,80 @@
+openapi: 3.1.0
+info:
+  title: fal.ai Inference API
+  version: 1.0.0
+  description: >
+    OpenAPI specification for fal.ai inference stack with FP4 optimization support.
+
+    This specification is designed to be compatible with fal.ai's official TypeScript and Python clients.
+
+  contact:
+    name: API Support
+    email: support@fal.ai
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://queue.fal.run
+    description: Queue API endpoint for asynchronous processing
+  - url: https://fal.run
+    description: Synchronous API endpoint
+  - url: wss://ws.fal.run
+    description: WebSocket endpoint for real-time processing
+security:
+  - ApiKeyAuth: []
+paths:
+  /fal-ai/flux/dev:
+    $ref: paths/fal-ai_flux_dev.yaml
+  /fal-ai/flux/dev/requests/{request_id}/status:
+    $ref: paths/fal-ai_flux_dev_requests_{request_id}_status.yaml
+  /fal-ai/flux/dev/requests/{request_id}/status/stream:
+    $ref: paths/fal-ai_flux_dev_requests_{request_id}_status_stream.yaml
+  /fal-ai/flux/dev/requests/{request_id}:
+    $ref: paths/fal-ai_flux_dev_requests_{request_id}.yaml
+  /fal-ai/flux/dev/requests/{request_id}/cancel:
+    $ref: paths/fal-ai_flux_dev_requests_{request_id}_cancel.yaml
+  /fal-ai/flux-pro/kontext:
+    $ref: paths/fal-ai_flux-pro_kontext.yaml
+  /fal-ai/flux-pro/kontext/requests/{request_id}/status:
+    $ref: paths/fal-ai_flux-pro_kontext_requests_{request_id}_status.yaml
+  /fal-ai/flux-pro/kontext/requests/{request_id}:
+    $ref: paths/fal-ai_flux-pro_kontext_requests_{request_id}.yaml
+  /fal-ai/flux/schnell:
+    $ref: paths/fal-ai_flux_schnell.yaml
+  /fal-ai/flux/schnell/requests/{request_id}/status:
+    $ref: paths/fal-ai_flux_schnell_requests_{request_id}_status.yaml
+  /fal-ai/flux/schnell/requests/{request_id}:
+    $ref: paths/fal-ai_flux_schnell_requests_{request_id}.yaml
+  /fal-ai/qwen-image:
+    $ref: paths/fal-ai_qwen-image.yaml
+  /fal-ai/qwen-image/requests/{request_id}/status:
+    $ref: paths/fal-ai_qwen-image_requests_{request_id}_status.yaml
+  /fal-ai/qwen-image/requests/{request_id}:
+    $ref: paths/fal-ai_qwen-image_requests_{request_id}.yaml
+  /fal-ai/qwen-image-edit:
+    $ref: paths/fal-ai_qwen-image-edit.yaml
+  /fal-ai/qwen-image-edit/requests/{request_id}/status:
+    $ref: paths/fal-ai_qwen-image-edit_requests_{request_id}_status.yaml
+  /fal-ai/qwen-image-edit/requests/{request_id}:
+    $ref: paths/fal-ai_qwen-image-edit_requests_{request_id}.yaml
+  /fal-ai/qwen-image/image-to-image:
+    $ref: paths/fal-ai_qwen-image_image-to-image.yaml
+  /fal-ai/qwen-image/image-to-image/requests/{request_id}/status:
+    $ref: paths/fal-ai_qwen-image_image-to-image_requests_{request_id}_status.yaml
+  /fal-ai/qwen-image/image-to-image/requests/{request_id}:
+    $ref: paths/fal-ai_qwen-image_image-to-image_requests_{request_id}.yaml
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key in format "Key YOUR_FAL_KEY"
+tags:
+  - name: FLUX Models
+    description: FLUX.1 family of models including dev, schnell, and Kontext
+  - name: Qwen Models
+    description: Qwen Image generation and editing models
+x-webhooks:
+  requestCompleted:
+    $ref: webhooks/requestCompleted.yaml

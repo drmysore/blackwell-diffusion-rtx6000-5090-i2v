@@ -1,0 +1,46 @@
+get:
+  tags:
+    - Recommendations
+  summary: Get New Profiles
+  description: Get recently created profiles, ordered by creation date
+  operationId: getNewProfiles
+  security: []
+  parameters:
+    - name: limit
+      in: query
+      description: Number of new profiles to return
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+    - name: since
+      in: query
+      description: Return profiles created since this date (ISO 8601)
+      required: false
+      schema:
+        type: string
+        format: date-time
+  responses:
+    '200':
+      description: New profiles retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              profiles:
+                type: array
+                items:
+                  $ref: ../components/schemas/Profile.yaml
+              total:
+                type: integer
+                description: Total number of new profiles
+            required:
+              - profiles
+              - total
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

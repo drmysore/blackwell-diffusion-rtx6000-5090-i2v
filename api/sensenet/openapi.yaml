@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: SENSENET API
+  version: 1.0.0
+  description: "SENSENET is a revolutionary platform for creating, managing, and monetizing profiles with integrated social media capabilities.\n\n<h2 style=\"margin-top:1em\">Overview</h2>\nSENSENET enables users to create profiles that can generate content and manage social media presence. Each profile becomes a unique digital asset with its own social following. Users can create multiple profiles under their account, each with distinct characteristics and social connections.\n<h2 style=\"margin-top:1em\">Key Features</h2>\n  \n- **Profile Creation**: Design unique profiles with custom avatars under your user account\n- **Content Generation**: Automated social media content creation and scheduling per profile\n- **Social Integration**: Connect profiles to TikTok, Instagram, Twitter, and more\n- **Community Engagement**: Users can interact with profiles through the platform\n\n<h2 style=\"margin-top:1em\">Authentication</h2> All API endpoints require authentication via Bearer token obtained through our authentication flow.\n"
+  contact:
+    name: SENSENET Support
+    email: support@sensenet.fxy.dev
+    url: https://sensenet.fxy.dev/support
+  license:
+    name: Proprietary
+    url: https://sensenet.fxy.dev/terms
+  x-logo:
+    url: https://sensenet.fxy.dev/logo.png
+    altText: SENSENET Logo
+servers:
+  - url: https://api.sensenet.fxy.dev/v1
+    description: Production server
+  - url: https://staging.api.sensenet.fxy.dev/v1
+    description: Staging server
+security:
+  - bearerAuth: []
+tags:
+  - name: Profiles
+    description: Profile creation and management under user accounts
+    x-displayName: Profiles
+  - name: Social Sharing
+    description: Social media connections, sharing and analytics
+    x-displayName: Social Sharing
+  - name: Posts
+    description: |
+      # Overview
+
+      The Posts system manages content that lives natively on fleek, providing community features like feeds, engagement tracking, and discovery mechanisms. Posts are the base content created within the platform that can later be shared to social media platforms.
+
+      <h2 style="margin-top:1em">Post Management</h2>
+
+      - **Creating Posts**: Posts require a caption and can include multiple content assets (images, videos)
+      - **Post Lifecycle**: Posts can be drafts, scheduled, published, or failed
+      - **Engagement**: Users can like posts and view engagement metrics
+      - **Profile Association**: Each post belongs to a specific profile
+
+      <h2 style="margin-top:1em">Relationship to Social Sharing</h2>
+
+      - **Content Creation**: Posts are created first within the fleek platform
+      - **Social Distribution**: Posts can then be shared across multiple social media platforms
+      - **Unified Management**: Posts serve as the central content hub before distribution
+
+      The Posts API provides the core content management and community experience for the fleek platform.
+    x-displayName: Posts
+  - name: Content
+    description: "## Overview\nContent Studio operates through **content sessions** - persistent workspaces that maintain context and enable iterative content creation. Each session is associated with a profile and serves as the foundation for generating related content.\n\n<h2 style=\"margin-top:1em\">Content Sessions</h2>\n\nEach session maintains its identity throughout its lifecycle, allowing for coherent content creation that builds upon previous outputs or resets to start fresh when needed.\n\n<h2 style=\"margin-top:1em\">Content Messages</h2>\n\nWithin each session, **content messages** represent individual generation requests. Each message:\n\n- Contains a text prompt describing the desired content\n- Triggers asynchronous content generation \n- Tracks generation status (generating → ready/failed/archived)\n- Can build upon previous session context or reset to base sources via `resetContext: true`\n- Produces one or more content assets upon completion\n\n<h2 style=\"margin-top:1em\">Content Assets</h2>\n\n**Content assets** are the final generated outputs - images, videos, or other media files. Each asset:\n\n- Belongs to a specific message and session\n- Includes metadata (dimensions, content type, NSFW status)\n- Provides direct CDN URLs for immediate use\n- Maintains relationships to its source message and session context\n\nThe API follows a create → poll → retrieve pattern: create messages for async generation, poll message status for completion, then retrieve the resulting content assets.\n"
+    x-displayName: Content Studio
+  - name: Users
+    description: User profile management
+    x-displayName: User Management
+  - name: Recommendations
+    description: These endpoints provide different lenses for profile discovery, helping users find content that matches their interests and discover emerging creators.
+    x-displayName: Recommendations
+  - name: Events
+    description: Event tracking for user interactions and media sharing
+    x-displayName: Events
+  - name: Authentication
+    description: User authentication via email/password (Dev Only)
+    x-displayName: Authentication (Dev Only)
+paths:
+  /users/profiles:
+    $ref: paths/users_profiles.yaml
+  /users/profiles/{profileId}:
+    $ref: paths/users_profiles_{profileId}.yaml
+  /content/sessions/{sessionId}:
+    $ref: paths/content_sessions_{sessionId}.yaml
+  /content/messages:
+    $ref: paths/content_messages.yaml
+  /content/sessions/{sessionId}/messages:
+    $ref: paths/content_sessions_{sessionId}_messages.yaml
+  /content/messages/{messageId}:
+    $ref: paths/content_messages_{messageId}.yaml
+  /content/assets/{assetId}:
+    $ref: paths/content_assets_{assetId}.yaml
+  /social/connect:
+    $ref: paths/social_connect.yaml
+  /social/post:
+    $ref: paths/social_post.yaml
+  /social/status:
+    $ref: paths/social_status.yaml
+  /social/analytics:
+    $ref: paths/social_analytics.yaml
+  /social/analytics/posts/{postId}:
+    $ref: paths/social_analytics_posts_{postId}.yaml
+  /posts:
+    $ref: paths/posts.yaml
+  /posts/{postId}:
+    $ref: paths/posts_{postId}.yaml
+  /posts/{postId}/likes:
+    $ref: paths/posts_{postId}_likes.yaml
+  /recommendations/profiles/featured:
+    $ref: paths/recommendations_profiles_featured.yaml
+  /recommendations/profiles/trending:
+    $ref: paths/recommendations_profiles_trending.yaml
+  /recommendations/profiles/new:
+    $ref: paths/recommendations_profiles_new.yaml
+  /users:
+    $ref: paths/users_detail.yaml
+  /events/media-share:
+    $ref: paths/events_media-share.yaml
+  /auth/signup:
+    $ref: paths/auth_signup.yaml
+  /auth/token:
+    $ref: paths/auth_token.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from authentication endpoints

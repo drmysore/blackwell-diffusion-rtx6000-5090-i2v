@@ -1,0 +1,24 @@
+post:
+  operationId: submitQwenImage
+  summary: Submit Qwen Image generation request
+  tags:
+    - Qwen Models
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/QwenImageInput.yaml
+  responses:
+    '200':
+      description: Request successfully queued
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/QueueResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '429':
+      $ref: ../components/responses/RateLimited.yaml

@@ -1,0 +1,34 @@
+type: object
+properties:
+  email:
+    type: string
+    format: email
+  created:
+    type: string
+    format: date-time
+  activeSocialAccounts:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+  socialAccounts:
+    type: object
+    additionalProperties:
+      $ref: ./SocialAccount.yaml
+  plan:
+    type: string
+    enum:
+      - free
+      - premium
+      - business
+      - enterprise
+  usage:
+    type: object
+    properties:
+      postsThisMonth:
+        type: integer
+      postsTotal:
+        type: integer
+      apiCallsToday:
+        type: integer
+      apiCallsThisMonth:
+        type: integer

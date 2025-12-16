@@ -1,0 +1,13 @@
+type: object
+properties:
+  prompts:
+    type: array
+    items:
+      type: string
+    description: Generated optimized prompts
+  system_prompt_used:
+    type: string
+    description: System prompt ID used
+  generation_time_ms:
+    type: integer
+    description: Generation time in milliseconds

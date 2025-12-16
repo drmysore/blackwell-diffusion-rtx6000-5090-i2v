@@ -1,0 +1,12 @@
+type: object
+required:
+  - images
+properties:
+  images:
+    type: array
+    items:
+      $ref: ./ImageOutput.yaml
+  seed:
+    type: integer
+  prompt:
+    type: string

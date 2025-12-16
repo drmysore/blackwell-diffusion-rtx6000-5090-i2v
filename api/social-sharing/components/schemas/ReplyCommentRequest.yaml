@@ -1,0 +1,16 @@
+type: object
+required:
+  - commentId
+  - platforms
+  - comment
+properties:
+  commentId:
+    type: string
+    description: Social sharing comment ID to reply to
+  platforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+  comment:
+    type: string
+    maxLength: 5000

@@ -1,0 +1,110 @@
+get:
+  tags:
+    - Posts
+  summary: Get Post Likes
+  description: Get all likes for a specific post
+  operationId: getPostLikes
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      description: Post ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: limit
+      in: query
+      description: Number of likes per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  responses:
+    '200':
+      description: Post likes retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostLikesResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+post:
+  tags:
+    - Posts
+  summary: Like Post
+  description: Add a like to a post
+  operationId: likePost
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      description: Post ID to like
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '201':
+      description: Post liked successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostLike.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Post already liked by user
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/Conflict.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Posts
+  summary: Unlike Post
+  description: Remove a like from a post
+  operationId: unlikePost
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      description: Post ID to unlike
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '204':
+      description: Post unliked successfully
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

@@ -1,0 +1,18 @@
+get:
+  operationId: getFluxSchnellResult
+  summary: Get result of FLUX.1 schnell request
+  tags:
+    - FLUX Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+  responses:
+    '200':
+      description: Completed request result
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FluxSchnellOutput.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '410':
+      $ref: ../components/responses/RequestExpired.yaml

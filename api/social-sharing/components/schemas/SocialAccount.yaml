@@ -1,0 +1,20 @@
+type: object
+properties:
+  username:
+    type: string
+  displayName:
+    type: string
+  profileUrl:
+    type: string
+    format: uri
+  profileImageUrl:
+    type: string
+    format: uri
+  connected:
+    type: string
+    format: date-time
+  expiresAt:
+    type:
+      - string
+      - 'null'
+    format: date-time

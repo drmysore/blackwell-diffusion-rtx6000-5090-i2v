@@ -1,0 +1,61 @@
+type: object
+required:
+  - name
+  - age_range
+  - ethnicity
+  - hair_color
+  - hair_style
+  - eye_color
+  - skin_tone
+  - core_vibe
+  - clothing_style
+  - personality_traits
+properties:
+  name:
+    type: string
+    minLength: 1
+    description: Character name
+  age_range:
+    type: array
+    items:
+      type: integer
+      minimum: 18
+      maximum: 65
+    minItems: 2
+    maxItems: 2
+    description: Age range [min, max]
+  ethnicity:
+    type: string
+    minLength: 1
+    description: Character ethnicity
+  hair_color:
+    type: string
+    minLength: 1
+    description: Hair color
+  hair_style:
+    type: string
+    minLength: 1
+    description: Hair style
+  eye_color:
+    type: string
+    minLength: 1
+    description: Eye color
+  skin_tone:
+    type: string
+    minLength: 1
+    description: Skin tone
+  core_vibe:
+    type: string
+    minLength: 1
+    description: Character personality/energy
+  clothing_style:
+    type: string
+    minLength: 1
+    description: Clothing preferences
+  personality_traits:
+    type: array
+    items:
+      type: string
+      minLength: 1
+    minItems: 1
+    description: Personality traits

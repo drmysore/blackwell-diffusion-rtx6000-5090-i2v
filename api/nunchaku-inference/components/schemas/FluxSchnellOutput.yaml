@@ -1,0 +1,16 @@
+type: object
+required:
+  - images
+properties:
+  images:
+    type: array
+    items:
+      $ref: ./ImageOutput.yaml
+  seed:
+    type: integer
+  has_nsfw_concepts:
+    type: array
+    items:
+      type: boolean
+  prompt:
+    type: string

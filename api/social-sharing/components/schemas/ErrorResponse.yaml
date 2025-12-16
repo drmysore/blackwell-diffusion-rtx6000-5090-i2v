@@ -1,0 +1,12 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - error
+  errors:
+    type: array
+    items:
+      $ref: ./ErrorDetail.yaml
+  message:
+    type: string

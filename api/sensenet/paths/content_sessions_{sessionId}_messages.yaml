@@ -1,0 +1,81 @@
+get:
+  tags:
+    - Content
+  summary: List Content Session Messages
+  description: Get paginated list of messages in a content generation session
+  operationId: listSessionMessages
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: sessionId
+      in: path
+      description: Session ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: page
+      in: query
+      description: Page number (1-based)
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: limit
+      in: query
+      description: Number of messages per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+  responses:
+    '200':
+      description: Messages retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              messages:
+                type: array
+                items:
+                  $ref: ../components/schemas/ContentMessage.yaml
+              session:
+                $ref: ../components/schemas/ContentSession.yaml
+              pagination:
+                $ref: ../components/schemas/Pagination.yaml
+            required: [messages, session, pagination]
+          examples:
+            session_messages:
+              summary: Messages in a character session
+              value:
+                messages:
+                  - id: "msg-1111-2222-3333-444444444444"
+                    sessionId: "sess-1111-2222-3333-444444444444"
+                    prompt: "Create a morning workout motivation post"
+                    resetContext: false
+                    outputId: "out-1111-2222-3333-444444444444"
+                    createdAt: "2024-01-15T10:30:00Z"
+                    status: "completed"
+                  - id: "msg-2222-3333-4444-555555555555"
+                    sessionId: "sess-1111-2222-3333-444444444444"
+                    prompt: "Make it more minimalist"
+                    resetContext: false
+                    outputId: "out-2222-3333-4444-555555555555"
+                    createdAt: "2024-01-15T10:35:00Z"
+                    status: "completed"
+                session:
+                  id: "sess-1111-2222-3333-444444444444"
+                  sessionType: "character"
+                  messageCount: 2
+                pagination:
+                  page: 1
+                  limit: 50
+                  total: 2
+                  totalPages: 1
+                  hasMore: false
+    '404':
+      $ref: ../components/responses/NotFound.yaml

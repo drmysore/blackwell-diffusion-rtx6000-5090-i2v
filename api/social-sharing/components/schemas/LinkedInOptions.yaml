@@ -1,0 +1,15 @@
+type: object
+properties:
+  visibility:
+    type: string
+    enum:
+      - public
+      - connections
+    default: public
+  shareType:
+    type: string
+    enum:
+      - article
+      - image
+      - video
+      - document

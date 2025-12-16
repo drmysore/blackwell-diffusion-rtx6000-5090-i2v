@@ -1,0 +1,12 @@
+type: object
+properties:
+  facebook:
+    $ref: ./PlatformAnalytics.yaml
+  instagram:
+    $ref: ./PlatformAnalytics.yaml
+  twitter:
+    $ref: ./PlatformAnalytics.yaml
+  linkedin:
+    $ref: ./PlatformAnalytics.yaml
+  youtube:
+    $ref: ./PlatformAnalytics.yaml

@@ -1,0 +1,40 @@
+type: object
+properties:
+  profileId:
+    type: string
+    format: uuid
+    description: ID of the profile posting this content
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  caption:
+    type: string
+    description: Main post caption/content
+    example: "Check out this amazing workout motivation!"
+  assetIds:
+    type: array
+    items:
+      type: string
+      format: uuid
+    description: List of content asset IDs to include in the post
+    example: ["123e4567-e89b-12d3-a456-426614174000", "456e7890-e89b-12d3-a456-426614174001"]
+  platforms:
+    oneOf:
+      - type: array
+        items:
+          type: string
+          enum: ["instagram", "tiktok", "twitter", "facebook", "youtube"]
+        description: List of platforms to post to (uses main caption and assetIds)
+        example: ["instagram", "tiktok"]
+      - type: array
+        items:
+          $ref: ./SocialPlatformPost.yaml
+        description: Platform-specific post configurations
+  scheduledFor:
+    type: string
+    format: date-time
+    nullable: true
+    description: Schedule post for specific time. If null, posts immediately
+    example: "2024-01-15T10:30:00Z"
+required:
+  - profileId
+  - caption
+  - platforms

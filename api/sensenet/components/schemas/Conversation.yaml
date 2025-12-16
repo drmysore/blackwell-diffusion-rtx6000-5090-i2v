@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  characterId:
+    type: string
+    format: uuid
+  userId:
+    type: string
+    format: uuid
+  lastMessage:
+    $ref: ./Message.yaml
+  unreadCount:
+    type: integer
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

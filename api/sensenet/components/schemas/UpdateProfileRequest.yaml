@@ -1,0 +1,9 @@
+type: object
+properties:
+  username:
+    type: string
+    description: User's display name
+  avatar:
+    type: string
+    format: uri
+    description: User avatar URL

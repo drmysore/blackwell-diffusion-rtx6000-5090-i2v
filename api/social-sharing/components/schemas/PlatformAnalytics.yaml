@@ -1,0 +1,25 @@
+type: object
+properties:
+  impressions:
+    type: integer
+    description: Number of times post was shown
+  reach:
+    type: integer
+    description: Unique users who saw the post
+  engagements:
+    type: integer
+    description: Total interactions
+  likes:
+    type: integer
+  comments:
+    type: integer
+  shares:
+    type: integer
+  clicks:
+    type: integer
+  videoViews:
+    type: integer
+  saves:
+    type: integer
+  profileVisits:
+    type: integer

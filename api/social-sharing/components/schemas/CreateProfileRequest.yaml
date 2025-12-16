@@ -1,0 +1,26 @@
+type: object
+required:
+  - title
+properties:
+  title:
+    type: string
+    description: Unique profile title
+    minLength: 1
+    maxLength: 100
+  tags:
+    type: array
+    items:
+      type: string
+    description: Tags for organizing profiles
+  disabledSocialNetworks:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+    description: Social networks to disable for this profile
+  hideTitle:
+    type: boolean
+    default: false
+    description: Hide title on social linking page
+  displayTitle:
+    type: string
+    description: Alternative display title

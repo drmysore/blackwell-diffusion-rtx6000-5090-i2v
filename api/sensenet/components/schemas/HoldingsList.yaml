@@ -1,0 +1,13 @@
+type: object
+properties:
+  holdings:
+    type: array
+    items:
+      $ref: ./Holding.yaml
+  totalValueUsd:
+    type: number
+    description: Total value of all holdings in USD
+  totalProfitLoss:
+    type: number
+  pagination:
+    $ref: ./Pagination.yaml

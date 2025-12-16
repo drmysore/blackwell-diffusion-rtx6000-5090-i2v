@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Comments
+  summary: Post a comment
+  description: Add a comment to a social media post
+  operationId: postComment
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostCommentRequest.yaml
+  responses:
+    '200':
+      description: Comment posted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CommentResponse.yaml

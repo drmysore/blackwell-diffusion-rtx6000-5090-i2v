@@ -1,0 +1,45 @@
+post:
+  tags:
+    - training
+  summary: Submit LoRA training
+  description: |
+    Train character-specific LoRA model using dataset images.
+
+    **Input**: Dataset image URLs + trigger word
+    **Model**: flux-lora-fast-training (optimized for character training)
+    **Duration**: ~10-20 minutes for 18 images
+  operationId: submitLoRATraining
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/LoRATrainingRequest.yaml
+  callbacks:
+    onCompletion:
+      '{$request.body#/webhook_url}':
+        post:
+          tags:
+            - training
+          summary: Training completion webhook
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/LoRATrainingResult.yaml
+          responses:
+            '200':
+              description: Webhook received successfully
+            '400':
+              description: Invalid webhook payload
+  responses:
+    '202':
+      description: LoRA training job started
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

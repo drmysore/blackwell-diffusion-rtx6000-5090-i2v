@@ -1,0 +1,29 @@
+description: Rate limit exceeded
+headers:
+  X-RateLimit-Limit:
+    schema:
+      type: integer
+    description: Request limit per hour
+  X-RateLimit-Remaining:
+    schema:
+      type: integer
+    description: Remaining requests in current window
+  X-RateLimit-Reset:
+    schema:
+      type: integer
+    description: Unix timestamp when rate limit resets
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - error
+        message:
+          type: string
+          example: Rate limit exceeded. Please try again later.
+        retryAfter:
+          type: integer
+          description: Seconds until rate limit resets

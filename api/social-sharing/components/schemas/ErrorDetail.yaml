@@ -1,0 +1,20 @@
+type: object
+properties:
+  action:
+    type: string
+  status:
+    type: string
+    enum:
+      - error
+  code:
+    type: integer
+    description: Social sharing error code
+  message:
+    type: string
+    description: Human-readable error message
+  platform:
+    $ref: ./Platform.yaml
+  post:
+    type:
+      - string
+      - 'null'

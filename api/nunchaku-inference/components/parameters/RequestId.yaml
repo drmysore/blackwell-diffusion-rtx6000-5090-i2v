@@ -1,0 +1,8 @@
+name: request_id
+in: path
+required: true
+description: Unique identifier for the request
+schema:
+  type: string
+  format: uuid
+  example: 764cabcf-b745-4b3e-ae38-1200304cf45b

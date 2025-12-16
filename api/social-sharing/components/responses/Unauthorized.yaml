@@ -1,0 +1,13 @@
+description: Unauthorized - Invalid or missing API key
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - error
+        message:
+          type: string
+          example: Invalid API key

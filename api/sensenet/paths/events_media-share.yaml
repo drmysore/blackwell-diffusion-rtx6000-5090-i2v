@@ -1,0 +1,206 @@
+post:
+  tags:
+    - Events
+  summary: Record Media Share Event
+  description: |
+    Record when a user shares media (image/video) via share sheet from iPhone, Android, or web.
+    This endpoint tracks media sharing behavior for analytics and engagement metrics.
+  operationId: recordMediaShare
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            media_url:
+              type: string
+              format: uri
+              description: URL of the shared media
+              example: "https://cdn.sensenet.fxy.dev/media/123e4567-e89b-12d3-a456-426614174000.jpg"
+            media_type:
+              type: string
+              enum: [image, video, gif]
+              description: Type of media being shared
+              example: "image"
+            platform:
+              type: string
+              enum: [ios, android, web, desktop]
+              description: Platform from which the share originated
+              example: "ios"
+            share_method:
+              type: string
+              enum: [share_sheet, copy_link, direct_share, social_share]
+              description: Method used to share the media
+              example: "share_sheet"
+            share_destination:
+              nullable: true
+              $ref: '../components/schemas/SocialPlatform.yaml'
+            profile_id:
+              type: string
+              format: uuid
+              nullable: true
+              description: Profile ID associated with the media (if applicable)
+              example: "123e4567-e89b-12d3-a456-426614174000"
+            post_id:
+              type: string
+              format: uuid
+              nullable: true
+              description: Post ID if sharing from a specific post
+              example: "456e7890-e89b-12d3-a456-426614174001"
+            content_asset_id:
+              type: string
+              format: uuid
+              nullable: true
+              description: Content asset ID if sharing generated content
+              example: "789e0123-e89b-12d3-a456-426614174002"
+            user_agent:
+              type: string
+              nullable: true
+              description: User agent string for web shares
+              example: "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X)..."
+            referrer:
+              type: string
+              format: uri
+              nullable: true
+              description: Referrer URL for web shares
+              example: "https://sensenet.fxy.dev/posts/123"
+            metadata:
+              type: object
+              additionalProperties: true
+              nullable: true
+              description: Additional metadata about the share event
+              example:
+                app_version: "1.2.3"
+                session_id: "sess-123e4567-e89b-12d3"
+                viewport_size: "375x812"
+          required:
+            - media_url
+            - media_type
+            - platform
+            - share_method
+        examples:
+          ios_share_sheet:
+            summary: iOS share sheet interaction
+            value:
+              media_url: "https://cdn.sensenet.fxy.dev/media/123e4567-e89b-12d3-a456-426614174000.jpg"
+              media_type: "image"
+              platform: "ios"
+              share_method: "share_sheet"
+              share_destination: "Instagram"
+              profile_id: "123e4567-e89b-12d3-a456-426614174000"
+              post_id: "456e7890-e89b-12d3-a456-426614174001"
+              metadata:
+                app_version: "1.2.3"
+                device_model: "iPhone14,2"
+          android_copy_link:
+            summary: Android copy link action
+            value:
+              media_url: "https://cdn.sensenet.fxy.dev/media/789e0123-e89b-12d3-a456-426614174002.mp4"
+              media_type: "video"
+              platform: "android"
+              share_method: "copy_link"
+              profile_id: "123e4567-e89b-12d3-a456-426614174000"
+              content_asset_id: "789e0123-e89b-12d3-a456-426614174002"
+              metadata:
+                app_version: "1.2.3"
+                android_version: "13"
+          web_direct_share:
+            summary: Web direct share to social platform
+            value:
+              media_url: "https://cdn.sensenet.fxy.dev/media/abc12345-e89b-12d3-a456-426614174003.gif"
+              media_type: "gif"
+              platform: "web"
+              share_method: "social_share"
+              share_destination: "Twitter"
+              profile_id: "123e4567-e89b-12d3-a456-426614174000"
+              user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+              referrer: "https://sensenet.fxy.dev/profiles/123e4567-e89b-12d3-a456-426614174000"
+              metadata:
+                viewport_size: "1920x1080"
+                browser: "Chrome"
+  responses:
+    '200':
+      description: Media share event recorded successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              event_id:
+                type: string
+                format: uuid
+                description: Unique identifier for the recorded event
+                example: "event-123e4567-e89b-12d3-a456-426614174000"
+              message:
+                type: string
+                example: "Media share event recorded successfully"
+              timestamp:
+                type: string
+                format: date-time
+                description: When the event was recorded
+                example: "2024-01-15T10:30:00Z"
+            required:
+              - event_id
+              - message
+              - timestamp
+    '400':
+      description: Bad request - invalid data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Invalid media_url format"
+            required:
+              - detail
+    '401':
+      description: Unauthorized - invalid or missing authentication
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Authentication required"
+            required:
+              - detail
+    '422':
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    loc:
+                      type: array
+                      items:
+                        type: string
+                    msg:
+                      type: string
+                    type:
+                      type: string
+            required:
+              - detail
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Failed to record media share event"
+            required:
+              - detail

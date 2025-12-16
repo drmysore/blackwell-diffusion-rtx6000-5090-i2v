@@ -1,0 +1,22 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  id:
+    type: string
+    description: Social sharing comment ID
+  platforms:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        status:
+          type: string
+        id:
+          type: string
+        commentUrl:
+          type: string
+          format: uri

@@ -1,0 +1,25 @@
+type: object
+properties:
+  posts:
+    type: array
+    items:
+      $ref: ./Post.yaml
+    description: List of posts
+  total:
+    type: integer
+    description: Total number of posts available
+  page:
+    type: integer
+    description: Current page number
+  limit:
+    type: integer
+    description: Number of posts per page
+  hasMore:
+    type: boolean
+    description: Whether there are more posts available
+required:
+  - posts
+  - total
+  - page
+  - limit
+  - hasMore

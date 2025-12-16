@@ -1,0 +1,13 @@
+type: object
+properties:
+  status:
+    $ref: ./PostStatus.yaml
+  id:
+    type: string
+    description: Social network post ID
+  postUrl:
+    type: string
+    format: uri
+    description: Direct URL to the post
+  platform:
+    $ref: ./Platform.yaml

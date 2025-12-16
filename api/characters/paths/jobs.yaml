@@ -1,0 +1,48 @@
+get:
+  tags:
+    - jobs
+  summary: List jobs
+  description: List all jobs with filtering and pagination
+  operationId: listJobs
+  parameters:
+    - name: status
+      in: query
+      schema:
+        $ref: ../components/schemas/JobStatus.yaml
+      description: Filter by job status
+    - name: service
+      in: query
+      schema:
+        type: string
+        enum:
+          - headshots
+          - datasets
+          - training
+          - content
+      description: Filter by service type
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: Number of jobs to return
+    - name: offset
+      in: query
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: Number of jobs to skip
+  responses:
+    '200':
+      description: List of jobs
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobList.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

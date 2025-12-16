@@ -1,0 +1,43 @@
+post:
+  tags:
+    - files
+  summary: Upload file
+  description: Upload reference image or dataset images
+  operationId: uploadFile
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+              description: Image file (PNG, JPG, JPEG)
+            purpose:
+              type: string
+              enum:
+                - reference_image
+                - dataset_image
+              description: Purpose of uploaded file
+          required:
+            - file
+            - purpose
+  responses:
+    '201':
+      description: File uploaded successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FileUploadResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '413':
+      description: File too large
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

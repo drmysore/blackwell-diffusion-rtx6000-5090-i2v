@@ -1,0 +1,7 @@
+type: object
+properties:
+  fbPages:
+    type: array
+    items:
+      type: string
+    description: Specific Facebook pages to post to

@@ -1,0 +1,5 @@
+description: Unauthorized - invalid or missing API key
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/ErrorResponse.yaml

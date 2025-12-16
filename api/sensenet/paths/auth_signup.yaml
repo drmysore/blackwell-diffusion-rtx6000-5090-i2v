@@ -1,0 +1,89 @@
+post:
+  tags:
+    - Authentication
+  summary: Sign Up (Dev Only)
+  description: |
+    Creates a user account and sends a confirmation email.
+    **This endpoint is only available in development/staging environments.**
+    Only emails from fleek.xyz domain are allowed.
+  operationId: signup
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: User's email address (must be @fleek.xyz)
+              example: "user@fleek.xyz"
+            password:
+              type: string
+              description: User's password
+              example: "securepassword123"
+          required:
+            - email
+            - password
+        examples:
+          signup_request:
+            summary: Basic signup
+            value:
+              email: "developer@fleek.xyz"
+              password: "mySecurePassword123"
+          signup_with_redirect:
+            summary: Signup with redirect
+            value:
+              email: "developer@fleek.xyz"
+              password: "mySecurePassword123"
+  responses:
+    '202':
+      description: Confirmation email sent successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Confirmation email sent. Please verify your email to sign in."
+            required:
+              - message
+    '400':
+      description: Bad request or signup failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Sign up failed: User already registered"
+            required:
+              - detail
+    '403':
+      description: Email domain not allowed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Only fleek.xyz emails are allowed"
+            required:
+              - detail
+    '405':
+      description: Method not allowed in production
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Signup is not available in production"
+            required:
+              - detail

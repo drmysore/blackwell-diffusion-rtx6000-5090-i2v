@@ -1,0 +1,9 @@
+description: Invalid request parameters
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    example:
+      error: BAD_REQUEST
+      message: Invalid request parameters
+      timestamp: '2024-01-01T00:00:00Z'

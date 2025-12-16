@@ -1,0 +1,15 @@
+get:
+  tags:
+    - User
+  summary: Get user information
+  description: Retrieve user profile details and connected social accounts
+  operationId: getUserInfo
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  responses:
+    '200':
+      description: User information retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UserInfo.yaml

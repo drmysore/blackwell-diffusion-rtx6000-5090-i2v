@@ -1,0 +1,10 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_binary(
+    name = "does_it_work",
+    srcs = [
+        "does_it_work.py",
+    ],
+    data = [
+    ],
+)

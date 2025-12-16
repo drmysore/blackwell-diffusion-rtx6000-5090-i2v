@@ -1,0 +1,11 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_binary(
+    name = "boost_features_example",
+    srcs = [
+        "boost_features_example.cpp",
+    ],
+    deps = [
+        "@pkg_config//:boost",
+    ],
+)

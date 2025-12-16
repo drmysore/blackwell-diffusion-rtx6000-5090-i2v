@@ -1,0 +1,81 @@
+type: object
+required:
+  - prompt
+properties:
+  prompt:
+    type: string
+    description: Text description of the image to generate
+    minLength: 1
+    maxLength: 10000
+  image_url:
+    type: string
+    format: uri
+    description: Optional input image for image-to-image generation
+  mask_url:
+    type: string
+    format: uri
+    description: Optional mask for inpainting
+  num_inference_steps:
+    type: integer
+    description: Number of denoising steps
+    minimum: 1
+    maximum: 100
+    default: 50
+  guidance_scale:
+    type: number
+    description: Guidance scale for classifier-free guidance
+    minimum: 0
+    maximum: 20
+    default: 3.5
+  num_images:
+    type: integer
+    description: Number of images to generate
+    minimum: 1
+    maximum: 4
+    default: 1
+  width:
+    type: integer
+    description: Width of generated image
+    minimum: 256
+    maximum: 2048
+    default: 1024
+    multipleOf: 8
+  height:
+    type: integer
+    description: Height of generated image
+    minimum: 256
+    maximum: 2048
+    default: 1024
+    multipleOf: 8
+  seed:
+    type: integer
+    description: Random seed for reproducibility
+    minimum: 0
+  enable_safety_checker:
+    type: boolean
+    description: Enable safety checks for generated content
+    default: true
+  output_format:
+    type: string
+    enum:
+      - png
+      - jpeg
+      - webp
+    description: Output image format
+    default: png
+  loras:
+    type: array
+    description: List of LoRA models to apply
+    items:
+      $ref: ./LoRASpec.yaml
+  embeddings:
+    type: array
+    description: List of embeddings to apply
+    items:
+      type: object
+      properties:
+        path:
+          type: string
+          format: uri
+        token:
+          type: string

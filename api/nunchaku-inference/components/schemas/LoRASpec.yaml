@@ -1,0 +1,14 @@
+type: object
+required:
+  - path
+properties:
+  path:
+    type: string
+    format: uri
+    description: URL to the LoRA model file
+  scale:
+    type: number
+    description: Strength of LoRA application
+    minimum: 0
+    maximum: 2
+    default: 1

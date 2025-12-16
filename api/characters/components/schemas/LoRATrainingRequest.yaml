@@ -1,0 +1,44 @@
+type: object
+required:
+  - dataset_images
+  - trigger_word
+properties:
+  dataset_images:
+    type: array
+    items:
+      type: string
+      format: uri
+    minItems: 10
+    description: URLs to dataset images
+  trigger_word:
+    type: string
+    description: Character trigger word
+  training_settings:
+    type: object
+    properties:
+      model:
+        type: string
+        enum:
+          - flux-lora-fast-training
+        default: flux-lora-fast-training
+      steps:
+        type: integer
+        minimum: 500
+        maximum: 2000
+        default: 1000
+      learning_rate:
+        type: number
+        minimum: 0.0001
+        maximum: 0.01
+        default: 0.0004
+      create_masks:
+        type: boolean
+        default: true
+        description: Create face masks for character training
+      is_style:
+        type: boolean
+        default: false
+        description: Style training vs character training
+  webhook_url:
+    type: string
+    format: uri

@@ -1,0 +1,27 @@
+post:
+  tags:
+    - prompts
+  summary: Generate optimized prompts
+  description: |
+    Convert character attributes and step type into optimized prompts using LLM.
+
+    **Character attributes are only used here** - image generation services
+    receive the optimized prompts, not character data.
+  operationId: generatePrompts
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PromptGenerationRequest.yaml
+  responses:
+    '200':
+      description: Prompts generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PromptGenerationResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

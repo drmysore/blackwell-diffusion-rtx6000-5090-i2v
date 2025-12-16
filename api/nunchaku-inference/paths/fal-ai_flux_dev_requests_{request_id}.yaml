@@ -1,0 +1,18 @@
+get:
+  operationId: getFluxDevResult
+  summary: Get result of FLUX.1 dev request
+  tags:
+    - FLUX Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+  responses:
+    '200':
+      description: Completed request result
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FluxDevOutput.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '410':
+      $ref: ../components/responses/RequestExpired.yaml

@@ -1,0 +1,70 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@rules_cuda//cuda:defs.bzl", "cuda_library")
+
+package(default_visibility = ["//visibility:public"])
+
+cuda_library(
+    name = "gemm_nvfp4_nvfp4_nvidia_kernel",
+    srcs = ["gemm_nvfp4_nvfp4_nvidia.cu"],
+    hdrs = [
+        "gemm_nvfp4_nvfp4_nvidia.cuh",
+        "helper.h",
+    ],
+    # TODO[b7r6]: let's get this sorted...
+    copts = ["-DFMT_USE_BITINT=0"],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+cc_binary(
+    name = "gemm_nvfp4_nvfp4_nvidia",
+    srcs = [
+        "gemm_nvfp4_nvfp4_nvidia.cpp",
+    ],
+    deps = [
+        ":gemm_nvfp4_nvfp4_nvidia_kernel",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+cuda_library(
+    name = "gemm_nvfp4_bf16_nvidia_kernel",
+    srcs = ["gemm_nvfp4_bf16_nvidia.cu"],
+    hdrs = [
+        "helper.h",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+    ],
+)
+
+cc_binary(
+    name = "gemm_nvfp4_bf16_nvidia",
+    srcs = [
+    ],
+    deps = [
+        ":gemm_nvfp4_bf16_nvidia_kernel",
+    ],
+)
+
+cuda_library(
+    name = "gemm_nvfp4_grouped_nvidia_kernel",
+    srcs = ["gemm_nvfp4_grouped_nvidia.cu"],
+    hdrs = [
+        "helper.h",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+    ],
+)
+
+cc_binary(
+    name = "gemm_nvfp4_grouped_nvidia",
+    srcs = [
+    ],
+    deps = [
+        ":gemm_nvfp4_grouped_nvidia_kernel",
+    ],
+)

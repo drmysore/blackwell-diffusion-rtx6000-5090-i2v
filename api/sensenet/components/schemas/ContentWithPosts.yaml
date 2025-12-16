@@ -1,0 +1,12 @@
+allOf:
+  - $ref: ./Content.yaml
+  - type: object
+    properties:
+      platformPosts:
+        type: array
+        items:
+          $ref: ./PlatformPost.yaml
+        description: All platform posts in this content
+      platformPostsPagination:
+        $ref: ./Pagination.yaml
+        description: Pagination for the platform posts within this content

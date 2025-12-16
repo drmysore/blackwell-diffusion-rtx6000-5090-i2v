@@ -1,0 +1,31 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Unique profile identifier
+  slug:
+    type: string
+    description: Random slug identifier for this profile
+    example: "fierce-dragon-42"
+  name:
+    type: string
+    description: Display name of the profile
+  avatar:
+    type: string
+    format: uri
+    description: Profile avatar URL
+  createdAt:
+    type: string
+    format: date-time
+    description: When the profile was created
+  userId:
+    type: string
+    format: uuid
+    description: ID of the user who owns this profile
+required:
+  - id
+  - slug
+  - name
+  - userId
+  - createdAt

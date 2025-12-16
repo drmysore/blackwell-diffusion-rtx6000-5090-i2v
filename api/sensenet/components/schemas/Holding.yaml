@@ -1,0 +1,12 @@
+type: object
+properties:
+  amount:
+    type: number
+  value:
+    type: number
+  profitLoss:
+    type: number
+  profitLossPercentage:
+    type: number
+  isEarlyBacker:
+    type: boolean

@@ -1,0 +1,17 @@
+type: object
+properties:
+  address:
+    type: string
+  username:
+    type: string
+  amount:
+    type: number
+  percentage:
+    type: number
+  isEarlyBacker:
+    type: boolean
+  backerNumber:
+    type: integer
+  firstPurchase:
+    type: string
+    format: date-time

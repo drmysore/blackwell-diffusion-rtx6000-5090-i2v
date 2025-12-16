@@ -1,0 +1,25 @@
+type: object
+required:
+  - name
+  - prompt
+properties:
+  name:
+    type: string
+    minLength: 1
+    maxLength: 50
+  prompt:
+    type: string
+    minLength: 10
+    maxLength: 1000
+  avatar:
+    type: string
+    format: uri
+  personality:
+    type: string
+  goals:
+    type: array
+    items:
+      type: string
+  ticker:
+    type: string
+    pattern: ^[A-Z]{3,5}$

@@ -1,0 +1,52 @@
+# Redocly CLI configuration file for balanced API linting
+# This configuration maintains quality while being practical for existing APIs
+extends:
+  - recommended
+# API files to lint
+apis:
+  characters:
+    root: characters/openapi.yaml
+# Balanced rule configuration
+rules:
+  # Info section rules - relaxed for existing APIs
+  info-contact: warn
+  info-license: warn
+  info-license-strict: off
+  # Operation rules - keep important ones as errors
+  operation-2xx-response: error
+  operation-4xx-response: warn # Relaxed from error
+  operation-operationId: error
+  operation-operationId-unique: error
+  operation-operationId-url-safe: error
+  operation-parameters-unique: error
+  operation-summary: error
+  operation-tag-defined: error
+  # Path rules - relaxed for practical API design
+  path-parameters-defined: error
+  paths-kebab-case: warn # Relaxed from error
+  no-path-trailing-slash: error
+  # Parameter rules
+  parameter-description: warn # Relaxed from error
+  no-unresolved-refs: error
+  # Schema rules - keep critical ones
+  no-example-value-and-externalValue: error
+  no-identical-paths: error
+  no-invalid-media-type-examples: error
+  no-server-example.com: error
+  no-server-trailing-slash: error
+  no-undefined-server-variable: error
+  # Component rules
+  component-name-unique: error
+  # Security rules
+  security-defined: error
+  # Tag rules
+  tag-description: error
+  tags-alphabetical: warn
+  # Relaxed rules for practical API design
+  boolean-parameter-prefixes: warn # Relaxed from error
+  no-ambiguous-paths: error
+  no-http-verbs-in-paths: warn # Relaxed from error - common in REST APIs
+  scalar-property-missing-example: off # Turned off - too many to fix
+
+# Note: CLI options like --format, --max-problems are passed via command line
+# The configuration file focuses on rules and API definitions

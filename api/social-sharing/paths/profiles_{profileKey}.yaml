@@ -1,0 +1,20 @@
+delete:
+  tags:
+    - Profiles
+  summary: Delete user profile
+  description: Permanently delete a user profile
+  operationId: deleteProfile
+  parameters:
+    - name: profileKey
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Profile key to delete
+  responses:
+    '200':
+      description: Profile deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteResponse.yaml

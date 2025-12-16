@@ -1,0 +1,15 @@
+type: object
+properties:
+  transactionHash:
+    type: string
+  amount:
+    type: number
+  price:
+    type: number
+  total:
+    type: number
+  fees:
+    type: number
+  timestamp:
+    type: string
+    format: date-time

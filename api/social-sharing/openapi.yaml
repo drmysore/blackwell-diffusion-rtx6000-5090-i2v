@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Social Sharing API
+  version: 1.0.0
+  description: >
+    Unified social media management API for posting, scheduling, analytics, and engagement across 13+ platforms.
+
+    This specification is designed for consumption via Redocly Realm and generates modern TypeScript (Zod) and Python (Pydantic) clients.
+
+  contact:
+    name: Social Sharing Support
+    email: contact@social-sharing.com
+    url: https://www.social-sharing.com
+  license:
+    name: Proprietary
+    url: https://www.social-sharing.com/terms/
+  x-logo:
+    url: https://www.social-sharing.com/logo.png
+    altText: Social Sharing Logo
+servers:
+  - url: https://api.social-sharing.com/api
+    description: Production API Server
+externalDocs:
+  description: Official Social Sharing API Documentation
+  url: https://www.social-sharing.com/docs
+tags:
+  - name: Analytics
+    description: Retrieve post and account analytics
+  - name: Comments
+    description: Manage post comments and replies
+  - name: Hashtags
+    description: Hashtag generation and management
+  - name: History
+    description: Access post history and status
+  - name: Links
+    description: URL shortening and link analytics
+  - name: Media
+    description: Upload and manage media files
+  - name: Posts
+    description: Create, manage, and delete social media posts
+  - name: Profiles
+    description: Manage user profiles (Business Plan)
+  - name: Reviews
+    description: Manage business reviews
+  - name: User
+    description: User account information and settings
+  - name: Webhooks
+    description: Configure webhook notifications
+security:
+  - bearerAuth: []
+paths:
+  /post:
+    $ref: paths/post.yaml
+  /post/{id}:
+    $ref: paths/post_{id}.yaml
+  /history:
+    $ref: paths/history.yaml
+  /analytics/post:
+    $ref: paths/analytics_post.yaml
+  /analytics/social:
+    $ref: paths/analytics_social.yaml
+  /comments/{id}:
+    $ref: paths/comments_{id}.yaml
+  /comments:
+    $ref: paths/comments.yaml
+  /comments/reply:
+    $ref: paths/comments_reply.yaml
+  /media/upload:
+    $ref: paths/media_upload.yaml
+  /user:
+    $ref: paths/user.yaml
+  /profiles:
+    $ref: paths/profiles.yaml
+  /profiles/{profileKey}:
+    $ref: paths/profiles_{profileKey}.yaml
+  /profiles/generate-jwt:
+    $ref: paths/profiles_generate-jwt.yaml
+  /links:
+    $ref: paths/links.yaml
+  /links/{id}/analytics:
+    $ref: paths/links_{id}_analytics.yaml
+  /hashtags:
+    $ref: paths/hashtags.yaml
+  /webhooks:
+    $ref: paths/webhooks.yaml
+  /webhooks/{id}:
+    $ref: paths/webhooks_{id}.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API Key authentication. Format: Bearer YOUR_API_KEY'

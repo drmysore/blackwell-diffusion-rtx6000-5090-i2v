@@ -1,0 +1,14 @@
+type: object
+required:
+  - file
+properties:
+  file:
+    type: string
+    description: Base64 encoded file data
+    example: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...
+  fileName:
+    type: string
+    description: Original filename
+  description:
+    type: string
+    description: Media description

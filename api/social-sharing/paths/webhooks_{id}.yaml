@@ -1,0 +1,21 @@
+delete:
+  tags:
+    - Webhooks
+  summary: Delete webhook
+  description: Remove a registered webhook
+  operationId: deleteWebhook
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Webhook ID
+  responses:
+    '200':
+      description: Webhook deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteResponse.yaml

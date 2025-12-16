@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Media
+  summary: Upload media file
+  description: Upload and store an image or video file
+  operationId: uploadMedia
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UploadMediaRequest.yaml
+  responses:
+    '200':
+      description: Media uploaded successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UploadMediaResponse.yaml

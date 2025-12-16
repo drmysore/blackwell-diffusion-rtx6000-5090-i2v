@@ -1,0 +1,27 @@
+type: object
+properties:
+  clicks:
+    type: integer
+  uniqueClicks:
+    type: integer
+  clicksByCountry:
+    type: object
+    additionalProperties:
+      type: integer
+  clicksByDevice:
+    type: object
+    properties:
+      desktop:
+        type: integer
+      mobile:
+        type: integer
+      tablet:
+        type: integer
+  clicksByBrowser:
+    type: object
+    additionalProperties:
+      type: integer
+  clicksByReferer:
+    type: object
+    additionalProperties:
+      type: integer

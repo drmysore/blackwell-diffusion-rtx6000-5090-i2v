@@ -1,0 +1,44 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@rules_cuda//cuda:defs.bzl", "cuda_library")
+
+cc_binary(
+    name = "hello-libtorch",
+    srcs = [
+        "hello-libtorch.cpp",
+    ],
+    deps = [
+        "@pkg_config//:libtorch",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+cc_binary(
+    name = "qwen_generate_embedded_v1",
+    srcs = [
+        "qwen_generate_embedded_v1.cpp",
+    ],
+    deps = [
+        "//src/utils/pybind:python_torch_embed",
+        "@pkg_config//:libtorch",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+py_binary(
+    name = "export_model",
+    srcs = ["export_model.py"],
+)
+
+cc_binary(
+    name = "inference",
+    srcs = ["inference.cpp"],
+    deps = [
+        "@pkg_config//:libtorch",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+py_binary(
+    name = "export_flux_pt",
+    srcs = ["export_flux_pt.py"],
+)

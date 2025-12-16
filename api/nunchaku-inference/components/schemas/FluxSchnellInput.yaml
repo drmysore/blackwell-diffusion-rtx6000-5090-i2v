@@ -1,0 +1,55 @@
+type: object
+required:
+  - prompt
+properties:
+  prompt:
+    type: string
+    description: Text description of the image to generate
+    minLength: 1
+    maxLength: 10000
+  num_inference_steps:
+    type: integer
+    description: Number of inference steps (1-4 for turbo mode)
+    minimum: 1
+    maximum: 8
+    default: 4
+  guidance_scale:
+    type: number
+    description: Guidance scale (typically 0 for schnell)
+    minimum: 0
+    maximum: 10
+    default: 0
+  num_images:
+    type: integer
+    description: Number of images to generate
+    minimum: 1
+    maximum: 4
+    default: 1
+  width:
+    type: integer
+    description: Width of generated image
+    minimum: 256
+    maximum: 2048
+    default: 1024
+    multipleOf: 8
+  height:
+    type: integer
+    description: Height of generated image
+    minimum: 256
+    maximum: 2048
+    default: 1024
+    multipleOf: 8
+  seed:
+    type: integer
+    description: Random seed
+    minimum: 0
+  enable_safety_checker:
+    type: boolean
+    default: true
+  output_format:
+    type: string
+    enum:
+      - png
+      - jpeg
+      - webp
+    default: png

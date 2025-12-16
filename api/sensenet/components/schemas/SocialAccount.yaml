@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  platform:
+    $ref: ./SocialPlatform.yaml
+  username:
+    type: string
+  profileUrl:
+    type: string
+    format: uri
+  connectedAt:
+    type: string
+    format: date-time
+  isActive:
+    type: boolean

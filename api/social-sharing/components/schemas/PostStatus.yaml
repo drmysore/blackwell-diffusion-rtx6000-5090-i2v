@@ -1,0 +1,8 @@
+type: string
+enum:
+  - success
+  - error
+  - scheduled
+  - processing
+  - awaiting_approval
+description: Status of a post

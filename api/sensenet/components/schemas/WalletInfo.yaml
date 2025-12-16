@@ -1,0 +1,30 @@
+type: object
+properties:
+  address:
+    type: string
+  balance:
+    type: number
+  nativeBalance:
+    type: number
+  totalValueUsd:
+    type: number
+    description: Total wallet value in USD
+  transactions:
+    type: array
+    items:
+      type: object
+      properties:
+        hash:
+          type: string
+        type:
+          type: string
+          enum:
+            - buy
+            - sell
+            - transfer
+            - reward
+        amount:
+          type: number
+        timestamp:
+          type: string
+          format: date-time

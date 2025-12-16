@@ -1,0 +1,113 @@
+get:
+  tags:
+    - Social Sharing
+  summary: Get post analytics by platform
+  description: >
+    Get detailed engagement metrics for a specific post broken down by platform. This provides platform-specific performance data including engagement rates, reach, impressions, and interaction counts for each social platform where the post was published.
+
+  operationId: getPostAnalytics
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: The post ID to get analytics for
+    - name: platforms
+      in: query
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          $ref: ../components/schemas/SocialPlatform.yaml
+      description: Filter analytics by specific platforms
+    - name: timeframe
+      in: query
+      schema:
+        type: string
+        enum: [1d, 7d, 30d, all]
+        default: all
+      description: Time range for analytics data
+  responses:
+    '200':
+      description: Post analytics by platform
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              postId:
+                type: string
+                format: uuid
+                description: The post ID these analytics are for
+              aggregateStats:
+                $ref: ../components/schemas/AggregateEngagementStats.yaml
+              platformAnalytics:
+                type: array
+                items:
+                  $ref: ../components/schemas/PlatformAnalytics.yaml
+                description: Engagement metrics broken down by platform
+              generatedAt:
+                type: string
+                format: date-time
+                description: When this analytics report was generated
+            required:
+              - postId
+              - aggregateStats
+              - platformAnalytics
+              - generatedAt
+          examples:
+            post_analytics:
+              summary: Post analytics across platforms
+              value:
+                postId: "123e4567-e89b-12d3-a456-426614174000"
+                aggregateStats:
+                  totalViews: 15420
+                  totalLikes: 892
+                  totalShares: 156
+                  totalComments: 234
+                  engagementRate: 8.3
+                platformAnalytics:
+                  - platform: "instagram"
+                    views: 8500
+                    likes: 520
+                    shares: 89
+                    comments: 134
+                    engagementRate: 8.7
+                    reach: 12400
+                    impressions: 18900
+                  - platform: "twitter"
+                    views: 4200
+                    likes: 245
+                    shares: 45
+                    comments: 67
+                    engagementRate: 8.5
+                    reach: 5800
+                    impressions: 9200
+                  - platform: "linkedin"
+                    views: 2720
+                    likes: 127
+                    shares: 22
+                    comments: 33
+                    engagementRate: 6.7
+                    reach: 3100
+                    impressions: 4300
+                generatedAt: "2024-01-15T14:30:00Z"
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      description: Post not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Post with ID '123e4567-e89b-12d3-a456-426614174000' not found"
+            required:
+              - detail
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

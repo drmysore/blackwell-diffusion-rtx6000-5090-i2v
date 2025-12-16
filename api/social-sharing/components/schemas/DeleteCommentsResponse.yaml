@@ -1,0 +1,22 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  platforms:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - delete
+        status:
+          type: string
+        id:
+          type: string
+        comment:
+          type: string

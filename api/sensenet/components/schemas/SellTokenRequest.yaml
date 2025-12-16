@@ -1,0 +1,12 @@
+type: object
+required:
+  - amount
+properties:
+  amount:
+    type: number
+    minimum: 0.0001
+  slippage:
+    type: number
+    minimum: 0
+    maximum: 100
+    default: 1

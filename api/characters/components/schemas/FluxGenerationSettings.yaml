@@ -1,0 +1,37 @@
+type: object
+properties:
+  model:
+    type: string
+    enum:
+      - flux-dev
+      - flux-kontext
+      - flux-lora-fast-training
+    description: Flux model to use
+  num_inference_steps:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 47
+  guidance_scale:
+    type: number
+    minimum: 0
+    maximum: 20
+    default: 2.6
+  image_size:
+    type: string
+    enum:
+      - square_hd
+      - portrait_4_3
+      - portrait_16_9
+      - landscape_4_3
+      - landscape_16_9
+    default: square_hd
+  strength:
+    type: number
+    minimum: 0
+    maximum: 1
+    description: Strength for image-to-image (dataset generation)
+  seed:
+    type: integer
+    minimum: 0
+    description: Random seed for reproducibility

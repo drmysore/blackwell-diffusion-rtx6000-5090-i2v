@@ -1,0 +1,7 @@
+type: object
+properties:
+  message:
+    $ref: ./ContentMessage.yaml
+    description: The created message (initially with status 'generating')
+required:
+  - message

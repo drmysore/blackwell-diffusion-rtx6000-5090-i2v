@@ -1,0 +1,18 @@
+get:
+  operationId: getQwenImageToImageResult
+  summary: Get result of Qwen Image-to-Image request
+  tags:
+    - Qwen Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+  responses:
+    '200':
+      description: Completed request result
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/QwenImageToImageOutput.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '410':
+      $ref: ../components/responses/RequestExpired.yaml

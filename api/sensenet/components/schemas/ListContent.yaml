@@ -1,0 +1,9 @@
+type: object
+properties:
+  content:
+    type: array
+    items:
+      $ref: ./Content.yaml
+    description: Array of content with aggregated stats from all platforms
+  pagination:
+    $ref: ./Pagination.yaml

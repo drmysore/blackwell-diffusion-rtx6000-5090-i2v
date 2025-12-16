@@ -1,0 +1,19 @@
+type: object
+properties:
+  followers:
+    type: integer
+  totalPosts:
+    type: integer
+  engagement:
+    type: number
+  reach:
+    type: integer
+  growth:
+    type: object
+    properties:
+      daily:
+        type: number
+      weekly:
+        type: number
+      monthly:
+        type: number

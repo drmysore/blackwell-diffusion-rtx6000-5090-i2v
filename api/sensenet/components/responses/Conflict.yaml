@@ -1,0 +1,9 @@
+description: Resource conflict
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    example:
+      error: CONFLICT
+      message: Resource already exists
+      timestamp: '2024-01-01T00:00:00Z'

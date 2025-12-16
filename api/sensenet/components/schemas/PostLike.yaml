@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Unique like identifier
+  postId:
+    type: string
+    format: uuid
+    description: Post that was liked
+  userId:
+    type: string
+    format: uuid
+    description: User who liked the post
+  createdAt:
+    type: string
+    format: date-time
+    description: When the like was created
+required:
+  - id
+  - postId
+  - userId
+  - createdAt

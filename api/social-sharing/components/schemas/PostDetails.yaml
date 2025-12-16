@@ -1,0 +1,12 @@
+allOf:
+  - $ref: ./PostResponse.yaml
+  - type: object
+    properties:
+      created:
+        type: string
+        format: date-time
+      updated:
+        type: string
+        format: date-time
+      analytics:
+        $ref: ./PostAnalytics.yaml

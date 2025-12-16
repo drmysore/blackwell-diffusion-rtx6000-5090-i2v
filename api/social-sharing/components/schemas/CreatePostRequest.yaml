@@ -1,0 +1,102 @@
+type: object
+required:
+  - post
+  - platforms
+properties:
+  post:
+    type: string
+    description: Post content text
+    maxLength: 10000
+    example: Check out our new product launch!
+  platforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+    minItems: 1
+    description: Target social networks
+  mediaUrls:
+    type: array
+    items:
+      type: string
+      format: uri
+    maxItems: 10
+    description: URLs of media files to include
+  scheduleDate:
+    type: string
+    format: date-time
+    description: ISO 8601 datetime for scheduled posting
+    example: '2024-12-01T10:00:00Z'
+  shortenLinks:
+    type: boolean
+    default: true
+    description: Automatically shorten URLs in post
+  autoHashtag:
+    oneOf:
+      - type: boolean
+      - type: object
+        properties:
+          max:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 2
+          position:
+            type: string
+            enum:
+              - auto
+              - end
+            default: auto
+    description: Auto-generate relevant hashtags
+  requiresApproval:
+    type: boolean
+    default: false
+    description: Hold post for approval workflow
+  notes:
+    type: string
+    description: Internal notes for the post
+  disableComments:
+    type: boolean
+    default: false
+    description: Disable comments on the post
+  firstComment:
+    type: object
+    properties:
+      comment:
+        type: string
+        description: Text for automatic first comment
+      mediaUrls:
+        type: array
+        items:
+          type: string
+          format: uri
+  autoRepost:
+    type: object
+    properties:
+      schedule:
+        type: array
+        items:
+          type: string
+          format: date-time
+        description: Schedule for automatic reposts
+      startDate:
+        type: string
+        format: date-time
+      endDate:
+        type: string
+        format: date-time
+  platformOptions:
+    type: object
+    description: Platform-specific options
+    properties:
+      facebook:
+        $ref: ./FacebookOptions.yaml
+      instagram:
+        $ref: ./InstagramOptions.yaml
+      twitter:
+        $ref: ./TwitterOptions.yaml
+      linkedin:
+        $ref: ./LinkedInOptions.yaml
+      reddit:
+        $ref: ./RedditOptions.yaml
+      youtube:
+        $ref: ./YouTubeOptions.yaml

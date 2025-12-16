@@ -1,0 +1,17 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  url:
+    type: string
+    format: uri
+    description: JWT URL for social linking page
+  token:
+    type: string
+    description: JWT token
+  expiresAt:
+    type: string
+    format: date-time

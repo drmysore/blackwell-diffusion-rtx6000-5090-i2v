@@ -1,0 +1,24 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "async-http-request",
+    srcs = [
+        "async_http_request.cpp",
+    ],
+    deps = [
+        "@pkg_config//:libhv",
+        "@pkg_config//:nlohmann_json",
+    ],
+)
+
+cc_binary(
+    name = "async-http-proxy",
+    srcs = [
+        "async_http_proxy.cpp",
+    ],
+    deps = [
+        "@pkg_config//:libhv",
+        "@pkg_config//:nlohmann_json",
+        "@pkg_config//:spdlog",
+    ],
+)

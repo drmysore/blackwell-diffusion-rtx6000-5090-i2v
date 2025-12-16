@@ -1,0 +1,10 @@
+description: Request already completed - cannot cancel
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - ALREADY_COMPLETED

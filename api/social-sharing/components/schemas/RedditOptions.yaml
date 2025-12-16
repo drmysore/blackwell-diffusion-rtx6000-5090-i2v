@@ -1,0 +1,21 @@
+type: object
+required:
+  - title
+  - subreddit
+properties:
+  title:
+    type: string
+    description: Post title (required for Reddit)
+  subreddit:
+    type: string
+    description: Target subreddit (without /r/)
+  link:
+    type: string
+    format: uri
+    description: URL for link posts
+  flairId:
+    type: string
+    description: Flair ID for the post
+  flairText:
+    type: string
+    description: Custom flair text

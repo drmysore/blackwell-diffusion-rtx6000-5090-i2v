@@ -1,0 +1,17 @@
+get:
+  operationId: getFluxSchnellStatus
+  summary: Get status of FLUX.1 schnell request
+  tags:
+    - FLUX Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+    - $ref: ../components/parameters/Logs.yaml
+  responses:
+    '200':
+      description: Request status
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StatusResponse.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

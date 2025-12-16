@@ -1,0 +1,10 @@
+name: logs
+in: query
+required: false
+description: Include logs in the response (1 to enable, 0 to disable)
+schema:
+  type: integer
+  enum:
+    - 0
+    - 1
+  default: 0

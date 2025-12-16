@@ -1,0 +1,126 @@
+post:
+  tags:
+    - Social Sharing
+  summary: Post to Social Media
+  description: >
+    Post content to social media platforms. Can post immediately or schedule for later. Supports either simple platform list (uses main caption and assets) or platform-specific  configurations with custom captions and assets per platform.
+
+  operationId: socialPost
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SocialPostRequest.yaml
+        examples:
+          immediate_post:
+            summary: Post immediately to multiple platforms
+            value:
+              profileId: "123e4567-e89b-12d3-a456-426614174000"
+              caption: "Check out this amazing workout motivation! 💪"
+              assetIds: ["456e7890-e89b-12d3-a456-426614174001"]
+              platforms: ["instagram", "tiktok"]
+              scheduledFor: null
+          scheduled_post:
+            summary: Schedule post for later
+            value:
+              profileId: "123e4567-e89b-12d3-a456-426614174000"
+              caption: "Morning workout session complete!"
+              assetIds: ["456e7890-e89b-12d3-a456-426614174001", "789e1234-e89b-12d3-a456-426614174002"]
+              platforms: ["instagram", "twitter"]
+              scheduledFor: "2024-01-16T08:00:00Z"
+          platform_specific:
+            summary: Platform-specific captions and assets
+            value:
+              profileId: "123e4567-e89b-12d3-a456-426614174000"
+              caption: "Default caption for other platforms"
+              assetIds: ["456e7890-e89b-12d3-a456-426614174001"]
+              platforms:
+                - platform: "instagram"
+                  caption: "💪 Crushing today's workout! #fitness #motivation #gains"
+                  assetIds: ["456e7890-e89b-12d3-a456-426614174001", "789e1234-e89b-12d3-a456-426614174002"]
+                - platform: "twitter"
+                  caption: "Morning workout ✅ What's your fitness goal today?"
+                  assetIds: ["456e7890-e89b-12d3-a456-426614174001"]
+              scheduledFor: null
+  responses:
+    '200':
+      description: Post created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SocialPostResponse.yaml
+          examples:
+            immediate_success:
+              summary: Posted immediately to all platforms
+              value:
+                postId: "abc12345-e89b-12d3-a456-426614174003"
+                status: "posted"
+                platforms:
+                  - platform: "instagram"
+                    status: "posted"
+                    platformPostId: "17841400427772208"
+                    platformUrl: "https://www.instagram.com/p/CG0UU3nF8H_/"
+                    error: null
+                  - platform: "tiktok"
+                    status: "posted"
+                    platformPostId: "7123456789012345678"
+                    platformUrl: "https://www.tiktok.com/@user/video/7123456789012345678"
+                    error: null
+                scheduledFor: null
+                createdAt: "2024-01-15T10:30:00Z"
+            scheduled_success:
+              summary: Post scheduled successfully
+              value:
+                postId: "def67890-e89b-12d3-a456-426614174004"
+                status: "scheduled"
+                platforms:
+                  - platform: "instagram"
+                    status: "scheduled"
+                    platformPostId: null
+                    platformUrl: null
+                    error: null
+                  - platform: "twitter"
+                    status: "scheduled"
+                    platformPostId: null
+                    platformUrl: null
+                    error: null
+                scheduledFor: "2024-01-16T08:00:00Z"
+                createdAt: "2024-01-15T10:30:00Z"
+            partial_failure:
+              summary: Posted to some platforms, failed on others
+              value:
+                postId: "ghi98765-e89b-12d3-a456-426614174005"
+                status: "failed"
+                platforms:
+                  - platform: "instagram"
+                    status: "posted"
+                    platformPostId: "17841400427772208"
+                    platformUrl: "https://www.instagram.com/p/CG0UU3nF8H_/"
+                    error: null
+                  - platform: "tiktok"
+                    status: "failed"
+                    platformPostId: null
+                    platformUrl: null
+                    error: "Rate limit exceeded. Please try again later."
+                scheduledFor: null
+                createdAt: "2024-01-15T10:30:00Z"
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      description: Asset not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+          example:
+            error: "One or more asset IDs not found"
+            message: "Asset ID '123e4567-e89b-12d3-a456-426614174000' does not exist"
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

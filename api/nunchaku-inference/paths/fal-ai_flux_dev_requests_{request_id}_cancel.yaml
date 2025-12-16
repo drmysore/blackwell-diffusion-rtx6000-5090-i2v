@@ -1,0 +1,18 @@
+put:
+  operationId: cancelFluxDev
+  summary: Cancel pending FLUX.1 dev request
+  tags:
+    - FLUX Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+  responses:
+    '202':
+      description: Cancellation requested
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CancellationResponse.yaml
+    '400':
+      $ref: ../components/responses/AlreadyCompleted.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

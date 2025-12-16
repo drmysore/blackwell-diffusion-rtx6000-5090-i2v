@@ -1,0 +1,24 @@
+type: object
+properties:
+  file_id:
+    type: string
+  url:
+    type: string
+    format: uri
+    description: Temporary URL for download
+  download_url:
+    type: string
+    format: uri
+    description: Permanent download URL
+  width:
+    type: integer
+  height:
+    type: integer
+  format:
+    type: string
+    enum:
+      - png
+      - jpeg
+      - jpg
+  size_bytes:
+    type: integer

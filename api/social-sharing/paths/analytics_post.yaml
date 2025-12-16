@@ -1,0 +1,30 @@
+get:
+  tags:
+    - Analytics
+  summary: Get post analytics
+  description: Retrieve engagement metrics for a specific post
+  operationId: getPostAnalytics
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Social sharing post ID or social network post ID
+    - name: platforms
+      in: query
+      schema:
+        type: array
+        items:
+          $ref: ../components/schemas/Platform.yaml
+      style: form
+      explode: false
+      description: Platforms to get analytics for
+  responses:
+    '200':
+      description: Analytics retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostAnalytics.yaml

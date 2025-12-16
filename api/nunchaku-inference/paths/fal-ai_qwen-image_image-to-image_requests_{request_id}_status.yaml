@@ -1,0 +1,17 @@
+get:
+  operationId: getQwenImageToImageStatus
+  summary: Get status of Qwen Image-to-Image request
+  tags:
+    - Qwen Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+    - $ref: ../components/parameters/Logs.yaml
+  responses:
+    '200':
+      description: Request status
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/StatusResponse.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

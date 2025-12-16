@@ -1,0 +1,45 @@
+post:
+  tags:
+    - content
+  summary: Generate final content
+  description: |
+    Generate Instagram-ready content using trained LoRA model.
+
+    **Input**: Optimized content prompt + trained LoRA URL
+    **Model**: flux-dev (high quality output)
+    **LoRAs**: AntiBlur + trained character LoRA
+  operationId: generateContent
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ContentGenerationRequest.yaml
+  callbacks:
+    onCompletion:
+      '{$request.body#/webhook_url}':
+        post:
+          tags:
+            - content
+          summary: Content generation webhook
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/ContentGenerationResult.yaml
+          responses:
+            '200':
+              description: Webhook received successfully
+            '400':
+              description: Invalid webhook payload
+  responses:
+    '202':
+      description: Content generation job started
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

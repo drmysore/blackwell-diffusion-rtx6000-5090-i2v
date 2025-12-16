@@ -1,0 +1,21 @@
+get:
+  tags:
+    - Links
+  summary: Get link analytics
+  description: Retrieve click analytics for a shortened link
+  operationId: getLinkAnalytics
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Link ID
+  responses:
+    '200':
+      description: Link analytics retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/LinkAnalytics.yaml

@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Comments
+  summary: Get comments for a post
+  description: Retrieve all comments for a specific post
+  operationId: getComments
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Social sharing post ID or social post ID
+    - name: platform
+      in: query
+      schema:
+        $ref: ../components/schemas/Platform.yaml
+      description: Platform when using social post ID
+    - name: searchPlatformId
+      in: query
+      schema:
+        type: boolean
+        default: false
+      description: Set to true when using social post ID
+  responses:
+    '200':
+      description: Comments retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CommentsResponse.yaml
+delete:
+  tags:
+    - Comments
+  summary: Delete comments
+  description: Delete single or all comments under a post
+  operationId: deleteComments
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Social sharing post ID, comment ID, or social comment ID
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            platforms:
+              type: array
+              items:
+                $ref: ../components/schemas/Platform.yaml
+              description: Platforms to delete comments from
+            searchPlatformId:
+              type: boolean
+              default: false
+              description: Set to true when using social comment ID
+  responses:
+    '200':
+      description: Comments deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteCommentsResponse.yaml

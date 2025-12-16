@@ -1,0 +1,19 @@
+type: object
+properties:
+  job_id:
+    type: string
+  service:
+    type: string
+    enum:
+      - headshots
+      - datasets
+      - training
+      - content
+  status:
+    $ref: ./JobStatus.yaml
+  created_at:
+    type: string
+    format: date-time
+  estimated_completion:
+    type: string
+    format: date-time

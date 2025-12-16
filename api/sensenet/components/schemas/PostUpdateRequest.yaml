@@ -1,0 +1,15 @@
+type: object
+properties:
+  caption:
+    type: string
+    minLength: 1
+    description: Text content/caption for the post
+  status:
+    type: string
+    enum: ["draft", "scheduled", "publishing", "published", "failed", "cancelled"]
+    description: Post status
+  scheduledFor:
+    type: string
+    format: date-time
+    nullable: true
+    description: When to schedule the post for publishing

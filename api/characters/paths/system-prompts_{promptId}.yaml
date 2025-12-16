@@ -1,0 +1,59 @@
+get:
+  tags:
+    - system-prompts
+  summary: Get system prompt
+  operationId: getSystemPrompt
+  parameters:
+    - $ref: ../components/parameters/PromptId.yaml
+  responses:
+    '200':
+      description: System prompt details
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SystemPrompt.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml
+put:
+  tags:
+    - system-prompts
+  summary: Update system prompt
+  description: Update existing system prompt (creates new version)
+  operationId: updateSystemPrompt
+  parameters:
+    - $ref: ../components/parameters/PromptId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateSystemPromptRequest.yaml
+  responses:
+    '200':
+      description: System prompt updated
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SystemPrompt.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml
+delete:
+  tags:
+    - system-prompts
+  summary: Delete system prompt
+  operationId: deleteSystemPrompt
+  parameters:
+    - $ref: ../components/parameters/PromptId.yaml
+  responses:
+    '204':
+      description: System prompt deleted
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

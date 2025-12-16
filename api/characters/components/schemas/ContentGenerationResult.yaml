@@ -1,0 +1,18 @@
+type: object
+properties:
+  job_id:
+    type: string
+  generated_images:
+    type: array
+    items:
+      $ref: ./GeneratedImage.yaml
+  prompt_used:
+    type: string
+  trained_lora_used:
+    type: string
+  trigger_word:
+    type: string
+  num_variations:
+    type: integer
+  generation_time_seconds:
+    type: number

@@ -1,0 +1,17 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  shortUrl:
+    type: string
+    format: uri
+  id:
+    type: string
+    description: Link ID for analytics
+  qrCode:
+    type: string
+    format: uri
+    description: QR code image URL

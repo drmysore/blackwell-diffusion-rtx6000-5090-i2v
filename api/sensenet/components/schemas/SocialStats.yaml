@@ -1,0 +1,41 @@
+type: object
+properties:
+  profileId:
+    type: string
+    format: uuid
+  period:
+    type: string
+  platforms:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        followers:
+          type: integer
+        following:
+          type: integer
+        posts:
+          type: integer
+        likes:
+          type: integer
+        comments:
+          type: integer
+        shares:
+          type: integer
+        engagement:
+          type: number
+        reach:
+          type: integer
+        impressions:
+          type: integer
+  aggregate:
+    type: object
+    properties:
+      totalFollowers:
+        type: integer
+      totalEngagement:
+        type: number
+      totalReach:
+        type: integer
+      growthRate:
+        type: number

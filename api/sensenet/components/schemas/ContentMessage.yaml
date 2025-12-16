@@ -1,0 +1,50 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "789e1234-e89b-12d3-a456-426614174002"
+    description: Unique message identifier
+  sessionId:
+    type: string
+    format: uuid
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    description: Session this message belongs to
+  prompt:
+    type: string
+    example: "Create a vibrant morning workout post"
+    description: The generation prompt
+  resetContext:
+    type: boolean
+    description: Whether context was reset for this generation
+    default: false
+  generationParams:
+    type: object
+    description: Generation parameters used
+  requestId:
+    type: string
+    format: uuid
+    example: "abc12345-e89b-12d3-a456-426614174003"
+    description: Request ID for tracking generation progress
+  createdAt:
+    type: string
+    format: date-time
+    example: "2024-01-15T10:30:00Z"
+    description: When the message was created
+  status:
+    type: string
+    enum: [generating, ready, failed, archived]
+    description: Current generation status
+    example: "ready"
+  assets:
+    type: array
+    items:
+      $ref: ./ContentAsset.yaml
+    description: Content assets generated for this message (populated when status is 'ready')
+required:
+  - id
+  - sessionId
+  - prompt
+  - requestId
+  - createdAt
+  - status

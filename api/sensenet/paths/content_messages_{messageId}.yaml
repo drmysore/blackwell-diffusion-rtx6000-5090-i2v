@@ -1,0 +1,62 @@
+get:
+  tags:
+    - Content
+  summary: Get Content Session Message
+  description: >
+    Retrieve message to get current status and assets for the generation request.
+
+  operationId: getContentMessage
+  parameters:
+    - name: messageId
+      in: path
+      description: Message ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Message status retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                $ref: ../components/schemas/ContentMessage.yaml
+            required: [message]
+          examples:
+            generating:
+              summary: Message still generating
+              value:
+                message:
+                  id: "789e1234-e89b-12d3-a456-426614174002"
+                  sessionId: "123e4567-e89b-12d3-a456-426614174000"
+                  prompt: "Create a vibrant morning workout post"
+                  requestId: "abc12345-e89b-12d3-a456-426614174003"
+                  assets: []
+                  createdAt: "2024-01-15T10:30:00Z"
+                  status: "generating"
+            ready_with_assets:
+              summary: Message ready with asset details
+              value:
+                message:
+                  id: "789e1234-e89b-12d3-a456-426614174002"
+                  sessionId: "123e4567-e89b-12d3-a456-426614174000"
+                  prompt: "Create a vibrant morning workout post"
+                  requestId: "abc12345-e89b-12d3-a456-426614174003"
+                  createdAt: "2024-01-15T10:30:00Z"
+                  status: "ready"
+                  assets:
+                    - id: "def67890-e89b-12d3-a456-426614174004"
+                      messageId: "789e1234-e89b-12d3-a456-426614174002"
+                      sessionId: "123e4567-e89b-12d3-a456-426614174000"
+                      variantIndex: 0
+                      assetHandle: "Y29udGVudHMvYWJjZDEyMzQvaW1hZ2UucG5n"
+                      height: 768
+                      width: 1024
+                      contentType: "image/webp"
+                      nsfw: false
+                      createdAt: "2024-01-15T10:32:00Z"
+    '404':
+      $ref: ../components/responses/NotFound.yaml

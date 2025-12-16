@@ -1,0 +1,30 @@
+type: object
+properties:
+  id:
+    type: string
+    description: System prompt ID
+  step_type:
+    type: string
+    enum:
+      - headshot
+      - dataset
+      - content
+    description: Pipeline step type
+  version:
+    type: string
+    description: Prompt version
+  prompt:
+    type: string
+    description: System prompt text
+  active:
+    type: boolean
+    description: Whether prompt is active
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
+    type: string
+    format: date-time
+  updated_by:
+    type: string
+    description: User who updated prompt

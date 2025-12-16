@@ -1,0 +1,47 @@
+get:
+  tags:
+    - History
+  summary: Get post history
+  description: Retrieve posting history with optional filters
+  operationId: getHistory
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: lastRecords
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+      description: Number of recent records to return
+    - name: lastDays
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 90
+      description: Filter posts from last N days
+    - name: platform
+      in: query
+      schema:
+        $ref: ../components/schemas/Platform.yaml
+      description: Filter by social network platform
+    - name: status
+      in: query
+      schema:
+        type: string
+        enum:
+          - success
+          - error
+          - scheduled
+          - processing
+      description: Filter by post status
+  responses:
+    '200':
+      description: History retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/HistoryItem.yaml

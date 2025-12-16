@@ -1,0 +1,121 @@
+get:
+  tags:
+    - Profiles
+  summary: Get Profile
+  description: Get a specific profile by ID
+  operationId: getProfile
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: path
+      description: Unique profile identifier
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Profile retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Profile.yaml
+          examples:
+            success:
+              summary: Profile details
+              value:
+                id: "123e4567-e89b-12d3-a456-426614174000"
+                slug: "fierce-dragon-42"
+                name: "My Profile"
+                avatar: "https://example.com/avatar.jpg"
+                createdAt: "2024-01-15T10:30:00Z"
+                userId: "456e7890-e89b-12d3-a456-426614174001"
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+put:
+  tags:
+    - Profiles
+  summary: Update Profile
+  description: Update an existing profile (only owner can update)
+  operationId: updateProfile
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: path
+      description: Unique profile identifier
+      required: true
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Display name of the profile
+            avatar:
+              type: string
+              format: uri
+              description: Profile avatar URL
+        examples:
+          update_profile:
+            summary: Update profile details
+            value:
+              name: "My Updated Profile"
+              avatar: "https://example.com/new-avatar.jpg"
+  responses:
+    '200':
+      description: Profile updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Profile.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Profiles
+  summary: Delete Profile
+  description: Delete a profile (only owner can delete)
+  operationId: deleteProfile
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: profileId
+      in: path
+      description: Unique profile identifier
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '204':
+      description: Profile deleted successfully
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

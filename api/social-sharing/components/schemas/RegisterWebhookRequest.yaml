@@ -1,0 +1,26 @@
+type: object
+required:
+  - url
+  - events
+properties:
+  url:
+    type: string
+    format: uri
+    description: Webhook endpoint URL
+  events:
+    type: array
+    items:
+      type: string
+      enum:
+        - post.published
+        - post.scheduled
+        - post.failed
+        - post.deleted
+        - comment.received
+        - comment.replied
+        - social.linked
+        - social.unlinked
+    description: Events to subscribe to
+  secret:
+    type: string
+    description: Secret for webhook signature validation

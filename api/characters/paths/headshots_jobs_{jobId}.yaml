@@ -1,0 +1,18 @@
+get:
+  tags:
+    - headshots
+  summary: Get headshot generation status
+  operationId: getHeadshotJob
+  parameters:
+    - $ref: ../components/parameters/JobId.yaml
+  responses:
+    '200':
+      description: Job status and results
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HeadshotJobStatus.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

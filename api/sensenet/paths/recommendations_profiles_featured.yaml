@@ -1,0 +1,51 @@
+get:
+  tags:
+    - Recommendations
+  summary: Get Featured Profiles
+  description: Get curated list of featured profiles selected by the platform
+  operationId: getFeaturedProfiles
+  security: []
+  parameters:
+    - name: limit
+      in: query
+      description: Number of featured profiles to return
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+  responses:
+    '200':
+      description: Featured profiles retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              profiles:
+                type: array
+                items:
+                  $ref: ../components/schemas/Profile.yaml
+                description: List of featured profiles
+            required:
+              - profiles
+          examples:
+            success:
+              summary: Featured profiles
+              value:
+                profiles:
+                  - id: "123e4567-e89b-12d3-a456-426614174000"
+                    name: "FitnessGuru"
+                    description: "Your personal AI fitness coach"
+                    avatar: "https://cdn.sensenet.fxy.dev/avatars/fitness-guru.jpg"
+                    isPublic: true
+                    createdAt: "2024-01-10T08:00:00Z"
+                  - id: "456e7890-e89b-12d3-a456-426614174001"
+                    name: "TechExplorer"
+                    description: "Exploring the latest in technology"
+                    avatar: "https://cdn.sensenet.fxy.dev/avatars/tech-explorer.jpg"
+                    isPublic: true
+                    createdAt: "2024-01-12T10:30:00Z"
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

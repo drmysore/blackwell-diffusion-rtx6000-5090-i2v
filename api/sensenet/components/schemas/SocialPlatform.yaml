@@ -1,0 +1,7 @@
+type: string
+enum:
+  - tiktok
+  - instagram
+  - twitter
+  - youtube
+  - threads

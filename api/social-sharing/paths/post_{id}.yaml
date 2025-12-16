@@ -1,0 +1,23 @@
+delete:
+  tags:
+    - Posts
+  summary: Delete a post
+  description: Delete a post from all connected social networks
+  operationId: deletePost
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Social sharing post ID
+  responses:
+    '200':
+      description: Post deleted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeleteResponse.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

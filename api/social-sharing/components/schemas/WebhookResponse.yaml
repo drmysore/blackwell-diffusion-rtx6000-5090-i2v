@@ -1,0 +1,20 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  id:
+    type: string
+    description: Webhook ID
+  url:
+    type: string
+    format: uri
+  events:
+    type: array
+    items:
+      type: string
+  created:
+    type: string
+    format: date-time

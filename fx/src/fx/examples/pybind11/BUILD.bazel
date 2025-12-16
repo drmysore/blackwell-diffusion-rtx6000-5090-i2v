@@ -1,0 +1,20 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@rules_python//python:defs.bzl", "py_test")
+load("//bzl:pybind11.bzl", "pybind11_extension")
+
+pybind11_extension(
+    name = "extension",
+    srcs = ["extension.cpp"],
+    deps = [
+        "@pkg_config//:libtorch_python",
+        "@pkg_config//:spdlog",
+    ],
+)
+
+# TODO[b7r6]: !! this has a problem (new i think) where `torch` is visible from
+# `bazel run` but not `bazel test` !!
+py_test(
+    name = "test_extension",
+    srcs = ["test_extension.py"],
+    deps = [":extension"],
+)

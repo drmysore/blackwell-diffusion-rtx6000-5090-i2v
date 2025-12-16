@@ -1,0 +1,31 @@
+type: object
+required:
+  - character_attributes
+  - step_type
+properties:
+  character_attributes:
+    $ref: ./CharacterAttributes.yaml
+  step_type:
+    type: string
+    enum:
+      - headshot
+      - dataset
+      - content
+    description: Pipeline step type
+  content_type:
+    type: string
+    enum:
+      - instagram_post
+      - professional
+      - lifestyle
+      - fashion
+    description: Content type (required for content step)
+  num_prompts:
+    type: integer
+    minimum: 1
+    maximum: 50
+    default: 1
+    description: Number of prompts to generate (for dataset)
+  user_action:
+    type: string
+    description: User action text for generating the prompt

@@ -1,0 +1,8 @@
+type: object
+properties:
+  connected:
+    type: boolean
+    description: Whether the platform is currently connected
+    example: true
+required:
+  - connected

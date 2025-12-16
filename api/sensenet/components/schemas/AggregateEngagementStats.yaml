@@ -1,0 +1,41 @@
+type: object
+properties:
+  totalLikes:
+    type: integer
+    minimum: 0
+    example: 5678
+    description: Sum of likes across all platforms
+  totalComments:
+    type: integer
+    minimum: 0
+    example: 234
+    description: Sum of comments across all platforms
+  totalShares:
+    type: integer
+    minimum: 0
+    example: 345
+    description: Sum of shares across all platforms
+  totalViews:
+    type: integer
+    minimum: 0
+    example: 45678
+    description: Sum of views across all platforms
+  totalReach:
+    type: integer
+    minimum: 0
+    example: 67890
+    description: Sum of reach across all platforms
+  totalImpressions:
+    type: integer
+    minimum: 0
+    example: 123456
+    description: Sum of impressions across all platforms
+  platformCount:
+    type: integer
+    minimum: 0
+    example: 3
+    description: Number of platforms with published posts
+  lastUpdated:
+    type: string
+    format: date-time
+    description: When stats were last updated

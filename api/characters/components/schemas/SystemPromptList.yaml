@@ -1,0 +1,8 @@
+type: object
+properties:
+  prompts:
+    type: array
+    items:
+      $ref: ./SystemPrompt.yaml
+  total:
+    type: integer

@@ -1,0 +1,28 @@
+type: object
+required:
+  - url
+  - width
+  - height
+properties:
+  url:
+    type: string
+    format: uri
+    description: URL of the generated image
+  width:
+    type: integer
+    description: Width of the image in pixels
+    minimum: 1
+  height:
+    type: integer
+    description: Height of the image in pixels
+    minimum: 1
+  content_type:
+    type: string
+    description: MIME type of the image
+    default: image/png
+  file_name:
+    type: string
+    description: Filename of the generated image
+  file_size:
+    type: integer
+    description: Size of the file in bytes

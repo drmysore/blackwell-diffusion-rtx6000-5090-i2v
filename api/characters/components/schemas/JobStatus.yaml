@@ -1,0 +1,7 @@
+type: string
+enum:
+  - pending
+  - processing
+  - completed
+  - failed
+  - cancelled

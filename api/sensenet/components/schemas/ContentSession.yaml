@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    description: Unique session identifier
+  profileId:
+    type: string
+    format: uuid
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    description: ID of the profile this session belongs to
+  start:
+    $ref: ./SessionStart.yaml
+    description: Initial session configuration
+  createdAt:
+    type: string
+    format: date-time
+    example: "2024-01-15T10:30:00Z"
+    description: When the session was created
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2024-01-15T11:45:00Z"
+    description: When the session was last updated
+  messageCount:
+    type: integer
+    example: 5
+    description: Total number of messages in this session
+  lastAssetId:
+    type: string
+    format: uuid
+    description: ID of the most recent content asset generated
+    example: "456e7890-e89b-12d3-a456-426614174001"
+    nullable: true
+required:
+  - id
+  - profileId
+  - createdAt
+  - updatedAt
+  - messageCount

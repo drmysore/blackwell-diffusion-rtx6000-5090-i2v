@@ -1,0 +1,52 @@
+post:
+  tags:
+    - Profiles
+  summary: Create user profile
+  description: Create a new user profile (Business Plan only)
+  operationId: createProfile
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreateProfileRequest.yaml
+  responses:
+    '200':
+      description: Profile created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ProfileResponse.yaml
+    '400':
+      description: Profile with this title already exists
+get:
+  tags:
+    - Profiles
+  summary: List user profiles
+  description: Get all user profiles under the primary account
+  operationId: listProfiles
+  parameters:
+    - name: title
+      in: query
+      schema:
+        type: string
+      description: Filter by profile title
+    - name: refId
+      in: query
+      schema:
+        type: string
+      description: Filter by reference ID
+    - name: hasActiveSocialAccounts
+      in: query
+      schema:
+        type: boolean
+      description: Filter by social account connection status
+  responses:
+    '200':
+      description: Profiles retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Profile.yaml

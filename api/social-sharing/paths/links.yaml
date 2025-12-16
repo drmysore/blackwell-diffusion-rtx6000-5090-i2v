@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Links
+  summary: Shorten URL
+  description: Create a shortened URL with tracking
+  operationId: shortenLink
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ShortenLinkRequest.yaml
+  responses:
+    '200':
+      description: Link shortened successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ShortenLinkResponse.yaml

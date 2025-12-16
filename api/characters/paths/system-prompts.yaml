@@ -1,0 +1,56 @@
+get:
+  tags:
+    - system-prompts
+  summary: List system prompts
+  description: Get all system prompts with filtering by step type
+  operationId: listSystemPrompts
+  parameters:
+    - name: step_type
+      in: query
+      schema:
+        type: string
+        enum:
+          - headshot
+          - dataset
+          - content
+      description: Filter by step type
+    - name: is_active_only
+      in: query
+      schema:
+        type: boolean
+        default: true
+      description: Show only active prompts
+  responses:
+    '200':
+      description: System prompts retrieved
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SystemPromptList.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml
+post:
+  tags:
+    - system-prompts
+  summary: Create system prompt
+  description: Create new system prompt for specific step type
+  operationId: createSystemPrompt
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreateSystemPromptRequest.yaml
+  responses:
+    '201':
+      description: System prompt created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/SystemPrompt.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

@@ -1,0 +1,6 @@
+name: Profile-Key
+in: header
+required: false
+schema:
+  type: string
+description: Profile Key for Business Plan users to act on behalf of a user profile

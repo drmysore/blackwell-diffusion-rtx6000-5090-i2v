@@ -1,0 +1,55 @@
+type: object
+properties:
+  postId:
+    type: string
+    format: uuid
+    description: Unique identifier for this social media post
+    example: "abc12345-e89b-12d3-a456-426614174003"
+  status:
+    type: string
+    enum: ["posted", "scheduled", "failed"]
+    description: Status of the post
+    example: "posted"
+  platforms:
+    type: array
+    items:
+      type: object
+      properties:
+        platform:
+          type: string
+          enum: ["instagram", "tiktok", "twitter", "facebook", "youtube"]
+        status:
+          type: string
+          enum: ["posted", "scheduled", "failed"]
+        platformPostId:
+          type: string
+          description: Platform-specific post ID
+          nullable: true
+        platformUrl:
+          type: string
+          format: uri
+          description: Direct link to the post on the platform
+          nullable: true
+        error:
+          type: string
+          description: Error message if posting failed
+          nullable: true
+      required:
+        - platform
+        - status
+    description: Status per platform
+  scheduledFor:
+    type: string
+    format: date-time
+    nullable: true
+    description: When the post is scheduled for (null if posted immediately)
+  createdAt:
+    type: string
+    format: date-time
+    description: When the post was created/submitted
+    example: "2024-01-15T10:30:00Z"
+required:
+  - postId
+  - status
+  - platforms
+  - createdAt

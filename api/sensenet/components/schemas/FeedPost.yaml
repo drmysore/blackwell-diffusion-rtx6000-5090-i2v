@@ -1,0 +1,48 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Unique platform post ID
+    example: "abc12345-e89b-12d3-a456-426614174003"
+  caption:
+    type: string
+    description: Post caption/content
+    example: "Check out this amazing workout motivation! 💪"
+  profileId:
+    type: string
+    format: uuid
+    description: ID of the profile that created this post
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  platform:
+    type: string
+    description: Platform where this post was published
+    example: "fleek"
+  assets:
+    type: array
+    items:
+      $ref: ./ContentAsset.yaml
+    description: List of assets (images, videos) included in this post
+  likes:
+    type: integer
+    description: Total number of likes for this post
+    example: 42
+  createdAt:
+    type: string
+    format: date-time
+    description: When the post was created
+    example: "2024-01-15T10:30:00Z"
+  updatedAt:
+    type: string
+    format: date-time
+    description: When the post was last updated
+    example: "2024-01-15T10:30:00Z"
+    nullable: true
+required:
+  - id
+  - caption
+  - profileId
+  - platform
+  - assets
+  - likes
+  - createdAt

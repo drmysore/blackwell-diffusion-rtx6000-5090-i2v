@@ -1,0 +1,16 @@
+type: object
+properties:
+  file_id:
+    type: string
+  url:
+    type: string
+    format: uri
+  filename:
+    type: string
+  size_bytes:
+    type: integer
+  format:
+    type: string
+  uploaded_at:
+    type: string
+    format: date-time

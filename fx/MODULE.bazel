@@ -1,0 +1,33 @@
+module(
+    name = "fx",
+    version = "0.1.0-20250824",
+)
+
+bazel_dep(name = "rules_cc", version = "0.1.1")
+bazel_dep(name = "rules_python", version = "0.22.1")
+bazel_dep(name = "platforms", version = "1.0.0")
+
+bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+git_override(
+    module_name = "hedron_compile_commands",
+    commit = "4f28899228fb3ad0126897876f147ca15026151e",
+    remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
+)
+
+pkg_config = use_extension("//bzl:rules_pkg_config.bzl", "pkg_config")
+use_repo(pkg_config, "pkg_config")
+
+register_toolchains(
+    "//toolchain:cc_toolchain",
+    "//toolchain:py_toolchain",
+)
+
+bazel_dep(name = "rules_cuda")
+git_override(
+    module_name = "rules_cuda",
+    commit = "a862f9b1cb7b6cf15c775fd31e4a1cf56f148a82",
+    remote = "https://github.com/bazel-contrib/rules_cuda.git",
+)
+
+include("//toolchain:cuda.MODULE.bazel")
+include("//toolchain:python.MODULE.bazel")

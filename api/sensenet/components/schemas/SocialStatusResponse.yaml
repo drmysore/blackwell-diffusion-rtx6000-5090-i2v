@@ -1,0 +1,23 @@
+type: object
+properties:
+  success:
+    type: boolean
+    description: Whether the operation was successful
+    example: true
+  platforms:
+    type: object
+    properties:
+      twitter:
+        $ref: './SocialPlatformStatus.yaml'
+      facebook:
+        $ref: './SocialPlatformStatus.yaml'
+      instagram:
+        $ref: './SocialPlatformStatus.yaml'
+      tiktok:
+        $ref: './SocialPlatformStatus.yaml'
+      youtube:
+        $ref: './SocialPlatformStatus.yaml'
+    description: Status information for each social media platform
+required:
+  - success
+  - platforms

@@ -1,0 +1,8 @@
+type: object
+properties:
+  templates:
+    type: array
+    items:
+      $ref: ./Template.yaml
+  pagination:
+    $ref: ./Pagination.yaml

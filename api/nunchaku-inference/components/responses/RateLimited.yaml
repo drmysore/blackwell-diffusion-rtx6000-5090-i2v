@@ -1,0 +1,19 @@
+description: Rate limit exceeded
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/ErrorResponse.yaml
+headers:
+  X-RateLimit-Limit:
+    schema:
+      type: integer
+    description: Request limit per hour
+  X-RateLimit-Remaining:
+    schema:
+      type: integer
+    description: Remaining requests
+  X-RateLimit-Reset:
+    schema:
+      type: string
+      format: date-time
+    description: Time when rate limit resets

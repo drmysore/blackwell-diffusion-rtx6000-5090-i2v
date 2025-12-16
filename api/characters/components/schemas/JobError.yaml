@@ -1,0 +1,11 @@
+type: object
+properties:
+  code:
+    type: string
+  message:
+    type: string
+  details:
+    type: object
+  timestamp:
+    type: string
+    format: date-time

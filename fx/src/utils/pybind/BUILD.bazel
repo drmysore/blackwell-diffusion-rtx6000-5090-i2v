@@ -1,0 +1,7 @@
+load("//bzl:python_torch.bzl", "python_torch_library")
+
+# !! TODO[b7r6]: solve this properyl... !!
+python_torch_library(
+    name = "python_torch_embed",
+    visibility = ["//visibility:public"],
+)

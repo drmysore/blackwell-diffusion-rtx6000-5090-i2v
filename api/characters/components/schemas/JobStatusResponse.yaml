@@ -1,0 +1,41 @@
+type: object
+properties:
+  job_id:
+    type: string
+  service:
+    type: string
+    enum:
+      - headshots
+      - datasets
+      - training
+      - content
+  status:
+    $ref: ./JobStatus.yaml
+  progress:
+    type: object
+    properties:
+      percentage:
+        type: number
+        minimum: 0
+        maximum: 100
+      current_step:
+        type: string
+      message:
+        type: string
+  result:
+    oneOf:
+      - $ref: ./HeadshotGenerationResult.yaml
+      - $ref: ./DatasetGenerationResult.yaml
+      - $ref: ./LoRATrainingResult.yaml
+      - $ref: ./ContentGenerationResult.yaml
+  error:
+    $ref: ./JobError.yaml
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
+    type: string
+    format: date-time
+  completed_at:
+    type: string
+    format: date-time

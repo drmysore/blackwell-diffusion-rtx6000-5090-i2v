@@ -1,0 +1,42 @@
+get:
+  tags:
+    - jobs
+  summary: Get job status
+  operationId: getJob
+  parameters:
+    - $ref: ../components/parameters/JobId.yaml
+  responses:
+    '200':
+      description: Job status
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobStatusResponse.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml
+delete:
+  tags:
+    - jobs
+  summary: Cancel job
+  operationId: cancelJob
+  parameters:
+    - $ref: ../components/parameters/JobId.yaml
+  responses:
+    '200':
+      description: Job cancelled successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      description: Job cannot be cancelled
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

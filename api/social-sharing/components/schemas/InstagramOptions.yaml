@@ -1,0 +1,9 @@
+type: object
+properties:
+  mediaType:
+    type: string
+    enum:
+      - post
+      - story
+      - reel
+    default: post

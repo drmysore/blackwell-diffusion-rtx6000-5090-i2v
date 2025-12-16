@@ -1,0 +1,214 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+load("@rules_cuda//cuda:defs.bzl", "cuda_library")
+load("//bzl:pybind11.bzl", "pybind11_extension")
+
+# CUDA kernels for quantization operations
+cuda_library(
+    name = "quantization_cuda",
+    srcs = ["quantization.cu"],
+    hdrs = ["quantization.cuh"],
+    copts = [
+        "-Xcompiler=-fPIC",
+        "--expt-relaxed-constexpr",
+        "-std=c++20",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:libtorch",
+    ],
+    alwayslink = True,
+)
+
+# TransformerEngine-adapted quantization operations  
+cuda_library(
+    name = "quantization_te_cuda",
+    srcs = ["quantization_te.cu"],
+    hdrs = ["quantization.cuh"],
+    copts = [
+        "-Xcompiler=-fPIC",
+        "--expt-relaxed-constexpr",
+        "-std=c++20",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:libtorch",
+    ],
+    alwayslink = True,
+)
+
+# Clean TransformerEngine implementation
+cuda_library(
+    name = "quantization_te_clean_cuda",
+    srcs = ["quantization_te_clean.cu"],
+    hdrs = ["quantization.cuh"],
+    copts = [
+        "-Xcompiler=-fPIC",
+        "--expt-relaxed-constexpr",
+        "-std=c++20",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:libtorch",
+    ],
+    alwayslink = True,
+)
+
+# CUDA kernel for GEMM operations
+cuda_library(
+    name = "kernel_cuda",
+    srcs = ["kernel.cu"],
+    hdrs = ["kernel.cuh"],
+    copts = [
+        "-Xcompiler=-fPIC",
+        "--expt-relaxed-constexpr",
+        "-std=c++20",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:libtorch",
+    ],
+    alwayslink = True,
+)
+
+# Tensor abstraction (uses quantization kernels)
+cc_library(
+    name = "tensor",
+    srcs = ["tensor.cpp"],
+    hdrs = ["tensor.h"],
+    copts = ["-std=c++20"],
+    deps = [
+        ":quantization_te_clean_cuda",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+# Python bindings for the whole module
+pybind11_extension(
+    name = "nvfp4",
+    srcs = ["bindings.cpp"],
+    deps = [
+        ":kernel_cuda",
+        ":quantization_cuda",
+        ":tensor",
+        "@pkg_config//:libtorch_python",
+    ],
+)
+
+# Export for linear layer to use
+cc_library(
+    name = "nvfp4_cc",
+    hdrs = [
+        "kernel.cuh",
+        "quantization.cuh",
+        "tensor.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":kernel_cuda",
+        ":quantization_cuda",
+        ":tensor",
+    ],
+)
+
+# Tests
+cc_test(
+    name = "test_quantization",
+    size = "small",
+    srcs = ["test_quantization.cpp"],
+    copts = ["-std=c++20"],
+    # Require CUDA for running
+    tags = ["requires-gpu"],
+    deps = [
+        ":quantization_te_clean_cuda",
+        "@pkg_config//:catch2",
+        "@pkg_config//:catch2_with_main",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+cc_test(
+    name = "test_tensor",
+    size = "medium",
+    srcs = ["test_tensor.cpp"],
+    copts = ["-std=c++20"],
+    tags = ["requires-gpu"],
+    deps = [
+        ":tensor",
+        "@pkg_config//:catch2",
+        "@pkg_config//:catch2_with_main",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+cc_test(
+    name = "test_utils",
+    size = "small",
+    srcs = ["test_utils.cpp"],
+    copts = ["-std=c++20"],
+    tags = ["requires-gpu"],
+    deps = [
+        ":tensor",
+        "@pkg_config//:catch2",
+        "@pkg_config//:catch2_with_main",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+cc_test(
+    name = "test_gemm",
+    size = "large",
+    srcs = ["test_gemm.cpp"],
+    copts = ["-std=c++20"],
+    tags = ["requires-gpu"],
+    deps = [
+        ":kernel_cuda",
+        ":tensor",
+        "@pkg_config//:catch2",
+        "@pkg_config//:catch2_with_main",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+# Test suite - runs all tests
+test_suite(
+    name = "nvfp4_tests",
+    tags = ["requires-gpu"],
+    tests = [
+        ":test_quantization",
+        ":test_tensor",
+        ":test_utils",
+        ":test_gemm",
+    ],
+)
+
+# Performance benchmarks (separate from regular tests)
+test_suite(
+    name = "nvfp4_benchmarks",
+    tags = ["requires-gpu", "manual"],
+    tests = [
+        ":test_quantization",
+        ":test_gemm",
+    ],
+    # Run with: bazel test --test_tag_filters=benchmark :nvfp4_benchmarks
+)
+
+# Python tests adapted from TransformerEngine
+py_test(
+    name = "test_nvfp4_quantize_te",
+    srcs = ["test_nvfp4_quantize_te.py"],
+    tags = ["requires-gpu"],
+    deps = [
+        ":nvfp4",
+    ],
+    data = [":nvfp4"],
+)
+
+py_test(
+    name = "test_nvfp4_gemm_te",
+    srcs = ["test_nvfp4_gemm_te.py"], 
+    tags = ["requires-gpu"],
+    deps = [
+        ":nvfp4",
+    ],
+    data = [":nvfp4"],
+)

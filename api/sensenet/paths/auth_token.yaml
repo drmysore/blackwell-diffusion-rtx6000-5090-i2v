@@ -1,0 +1,98 @@
+post:
+  tags:
+    - Authentication
+  summary: Get Access Token (Dev Only)
+  description: |
+    Sign in with email/password and get an access token.
+    **This endpoint is only available in development/staging environments.**
+    Returns an access token ONLY if the email has been confirmed.
+    Only emails from fleek.xyz domain are allowed.
+  operationId: getAccessToken
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: User's confirmed email address (must be @fleek.xyz)
+              example: "user@fleek.xyz"
+            password:
+              type: string
+              description: User's password
+              example: "securepassword123"
+          required:
+            - email
+            - password
+        examples:
+          token_request:
+            summary: Get access token
+            value:
+              email: "developer@fleek.xyz"
+              password: "mySecurePassword123"
+  responses:
+    '200':
+      description: Access token obtained successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              access_token:
+                type: string
+                description: JWT access token for API authentication
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            required:
+              - access_token
+    '400':
+      description: Bad request or sign in failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Sign in failed: Invalid login credentials"
+            required:
+              - detail
+    '401':
+      description: Unable to obtain access token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Unable to obtain access token. Make sure your email is confirmed and credentials are correct."
+            required:
+              - detail
+    '403':
+      description: Email domain not allowed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Only fleek.xyz emails are allowed"
+            required:
+              - detail
+    '405':
+      description: Method not allowed in production
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Token endpoint is not available in production"
+            required:
+              - detail

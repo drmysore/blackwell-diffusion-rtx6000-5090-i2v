@@ -1,0 +1,48 @@
+type: object
+required:
+  - prompt
+  - image_url
+properties:
+  prompt:
+    type: string
+    description: Text instruction for editing
+    minLength: 1
+    maxLength: 5000
+  image_url:
+    type: string
+    format: uri
+    description: Input image to edit
+  negative_prompt:
+    type: string
+    description: What to avoid in the edit
+  num_inference_steps:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 30
+  guidance_scale:
+    type: number
+    minimum: 0
+    maximum: 20
+    default: 4
+  num_images:
+    type: integer
+    minimum: 1
+    maximum: 4
+    default: 1
+  enable_safety_checker:
+    type: boolean
+    default: true
+  output_format:
+    type: string
+    enum:
+      - png
+      - jpeg
+      - webp
+    default: png
+  acceleration:
+    type: string
+    enum:
+      - regular
+      - fast
+    default: regular

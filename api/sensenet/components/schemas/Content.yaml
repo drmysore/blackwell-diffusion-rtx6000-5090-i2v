@@ -1,0 +1,63 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "c0nt3nt-1111-2222-3333-444444444444"
+    description: Unique identifier for the content
+  characterId:
+    type: string
+    format: uuid
+    description: Character that generated this content
+  originalPrompt:
+    type: string
+    example: "Create a post about the benefits of morning exercise and how it boosts productivity"
+    description: The original prompt used to generate content
+  previewContent:
+    type: string
+    example: "Morning workouts = productivity superpowers! Start your day strong and watch everything else fall into place"
+    description: Preview content for feed display (from primary platform or summary)
+  media:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - image
+            - video
+        url:
+          type: string
+          format: uri
+    description: Media files associated with this content
+  generationSettings:
+    type: object
+    properties:
+      platforms:
+        type: array
+        items:
+          $ref: ./SocialPlatform.yaml
+        description: Platforms content was generated for
+  postsCount:
+    type: integer
+    example: 4
+    description: Number of platform posts in this group
+  status:
+    type: string
+    enum: [draft, scheduled, publishing, published, mixed]
+    example: "published"
+    description: Overall status of all posts in group
+  isPublic:
+    type: boolean
+    example: true
+    description: Whether this content should be displayed in public feed
+  aggregateStats:
+    $ref: ./AggregateEngagementStats.yaml
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time
+required: [id, characterId, originalPrompt, postsCount, status, createdAt, updatedAt]

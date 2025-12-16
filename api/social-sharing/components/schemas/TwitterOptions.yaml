@@ -1,0 +1,8 @@
+type: object
+properties:
+  inReplyToStatusId:
+    type: string
+    description: ID of tweet to reply to
+  autoThread:
+    type: boolean
+    description: Automatically create thread for long posts

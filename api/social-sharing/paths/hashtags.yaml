@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Hashtags
+  summary: Generate hashtags
+  description: Generate relevant hashtags for content
+  operationId: generateHashtags
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GenerateHashtagsRequest.yaml
+  responses:
+    '200':
+      description: Hashtags generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/HashtagsResponse.yaml

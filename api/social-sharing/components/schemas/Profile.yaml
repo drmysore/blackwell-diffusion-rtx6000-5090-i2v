@@ -1,0 +1,24 @@
+type: object
+properties:
+  profileKey:
+    type: string
+  title:
+    type: string
+  refId:
+    type: string
+  created:
+    type: string
+    format: date-time
+  activeSocialAccounts:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+  tags:
+    type: array
+    items:
+      type: string
+  lastActive:
+    type: string
+    format: date-time
+  postsCount:
+    type: integer

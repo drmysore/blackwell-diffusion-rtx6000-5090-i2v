@@ -1,0 +1,54 @@
+type: object
+properties:
+  sessionId:
+    type: string
+    format: uuid
+    description: Optional session ID. If null, creates a new session.
+    nullable: true
+  start:
+    $ref: ./SessionStart.yaml
+    description: Session start configuration. Only allowed when sessionId is null
+  prompt:
+    type: string
+    description: Text prompt for content generation
+    example: "Create a vibrant morning workout post"
+  resetContext:
+    type: boolean
+    default: false
+    description: Reset to base session context, ignoring previous message history. Uses original character, image sources, or assets from session creation.
+  generationParams:
+    type: object
+    description: Generation parameters
+    properties:
+      imageSize:
+        type: string
+        default: "landscape_4_3"
+        description: Image aspect ratio/size
+        example: "landscape_4_3"
+      numInferenceSteps:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 28
+        description: Number of inference steps
+      guidanceScale:
+        type: number
+        minimum: 0.0
+        maximum: 20.0
+        default: 3.5
+        description: Guidance scale for generation
+      numImages:
+        type: integer
+        minimum: 1
+        maximum: 4
+        default: 1
+        description: Number of image variants to generate
+      enableSafetyChecker:
+        type: boolean
+        default: true
+        description: Enable safety checking
+      seed:
+        type: integer
+        description: Optional seed for reproducible generation
+required:
+  - prompt

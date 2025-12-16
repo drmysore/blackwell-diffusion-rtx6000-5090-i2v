@@ -1,0 +1,59 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "def67890-e89b-12d3-a456-426614174004"
+    description: Unique content asset identifier
+  messageId:
+    type: string
+    format: uuid
+    example: "789e1234-e89b-12d3-a456-426614174002"
+    description: Message that generated this asset
+  sessionId:
+    type: string
+    format: uuid
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    description: Session this asset belongs to
+  variantIndex:
+    type: integer
+    minimum: 0
+    example: 0
+    description: Index of this variant within the message's generated assets
+  assetHandle:
+    type: string
+    example: "Y29udGVudHMvZGVmNjc4OTAtZTg5Yi0xMmQzLWE0NTYtNDI2NjE0NzgwMDR3ZWJw"
+    description: Handle or URL of the content asset (e.g., image, video)
+  height:
+    type: integer
+    example: 768
+    description: Image height in pixels
+    nullable: true
+  width:
+    type: integer
+    example: 1024
+    description: Image width in pixels
+    nullable: true
+  contentType:
+    type: string
+    example: "image/webp"
+    description: MIME type of the content
+  nsfw:
+    type: boolean
+    default: false
+    example: false
+    description: Whether content is flagged as NSFW
+  createdAt:
+    type: string
+    format: date-time
+    example: "2024-01-15T10:32:00Z"
+    description: When the asset was created
+required:
+  - id
+  - messageId
+  - sessionId
+  - variantIndex
+  - assetHandle
+  - contentType
+  - nsfw
+  - createdAt

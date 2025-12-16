@@ -1,0 +1,38 @@
+post:
+  tags:
+    - Webhooks
+  summary: Register webhook
+  description: Register a webhook URL for notifications
+  operationId: registerWebhook
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RegisterWebhookRequest.yaml
+  responses:
+    '200':
+      description: Webhook registered successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/WebhookResponse.yaml
+get:
+  tags:
+    - Webhooks
+  summary: List webhooks
+  description: Get all registered webhooks
+  operationId: listWebhooks
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  responses:
+    '200':
+      description: Webhooks retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Webhook.yaml

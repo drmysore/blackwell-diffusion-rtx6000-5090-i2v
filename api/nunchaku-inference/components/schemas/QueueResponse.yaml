@@ -1,0 +1,23 @@
+type: object
+required:
+  - request_id
+  - response_url
+  - status_url
+  - cancel_url
+properties:
+  request_id:
+    type: string
+    format: uuid
+    description: Unique identifier for the queued request
+  response_url:
+    type: string
+    format: uri
+    description: URL to retrieve the response once completed
+  status_url:
+    type: string
+    format: uri
+    description: URL to check the status of the request
+  cancel_url:
+    type: string
+    format: uri
+    description: URL to cancel the request if still pending

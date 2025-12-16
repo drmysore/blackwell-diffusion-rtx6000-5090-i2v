@@ -1,0 +1,14 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  hashtags:
+    type: array
+    items:
+      type: string
+  textWithHashtags:
+    type: string
+    description: Original text with hashtags added

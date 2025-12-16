@@ -1,0 +1,8 @@
+type: object
+properties:
+  generated_image:
+    $ref: ./GeneratedImage.yaml
+  prompt_used:
+    type: string
+  generation_time_seconds:
+    type: number

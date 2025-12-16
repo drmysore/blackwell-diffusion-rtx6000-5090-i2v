@@ -1,0 +1,45 @@
+type: object
+properties:
+  address:
+    type: string
+    description: Token contract address
+  ticker:
+    type: string
+    description: Token ticker symbol
+  supply:
+    type: number
+    description: Current token supply
+  marketCap:
+    type: number
+    description: Current market capitalization
+  price:
+    type: number
+    description: Current token price
+  priceChange24h:
+    type: number
+    description: 24-hour price change percentage
+  volume24h:
+    type: number
+    description: 24-hour trading volume
+  volume7d:
+    type: number
+    description: Rolling weekly trading volume
+  allTimeHigh:
+    type: number
+    description: All-time highest price
+  allTimeLow:
+    type: number
+    description: All-time lowest price
+  circulatingSupply:
+    type: number
+    description: Tokens currently in circulation
+  maxSupply:
+    type: number
+    description: Maximum possible token supply
+    nullable: true
+  holders:
+    type: integer
+    description: Number of token holders
+  feesEarned:
+    type: number
+    description: Total fees earned by the token

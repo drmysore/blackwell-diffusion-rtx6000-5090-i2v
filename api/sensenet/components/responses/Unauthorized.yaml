@@ -1,0 +1,9 @@
+description: Authentication required
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    example:
+      error: UNAUTHORIZED
+      message: Authentication required
+      timestamp: '2024-01-01T00:00:00Z'

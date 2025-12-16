@@ -1,0 +1,32 @@
+type: object
+required:
+  - status
+properties:
+  status:
+    type: string
+    enum:
+      - IN_QUEUE
+      - IN_PROGRESS
+      - COMPLETED
+      - ERROR
+    description: Current status of the request
+  queue_position:
+    type: integer
+    description: Position in queue (only when status is IN_QUEUE)
+    minimum: 0
+  response_url:
+    type: string
+    format: uri
+    description: URL where the response will be available
+  logs:
+    type: array
+    description: Array of log entries (when logs=1 is specified)
+    items:
+      $ref: ./LogEntry.yaml
+  metrics:
+    type: object
+    description: Performance metrics for the request
+    properties:
+      inference_time:
+        type: number
+        description: Time taken for inference in seconds

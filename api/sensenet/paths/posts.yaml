@@ -1,0 +1,77 @@
+get:
+  tags:
+    - Posts
+  summary: Get Posts
+  description: >
+    Get a list of posts from the platform. Returns published posts with content assets and engagement data, ordered by publish date.
+
+  operationId: getPosts
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: page
+      in: query
+      description: Page number for pagination
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: limit
+      in: query
+      description: Number of posts per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+    - name: profileId
+      in: query
+      description: Filter posts by specific profile ID
+      required: false
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: List of posts
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PostListResponse.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+post:
+  tags:
+    - Posts
+  summary: Create Post
+  description: >
+    Create a new post with caption and content assets. The post will be created in draft status and can be scheduled or published later.
+
+  operationId: createPost
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostCreateRequest.yaml
+  responses:
+    '201':
+      description: Post created successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Post.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

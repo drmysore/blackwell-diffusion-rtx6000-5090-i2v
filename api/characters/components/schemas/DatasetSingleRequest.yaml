@@ -1,0 +1,17 @@
+type: object
+required:
+  - prompt
+  - reference_image_url
+  - trigger_word
+properties:
+  prompt:
+    type: string
+    description: Specific prompt for this image
+  reference_image_url:
+    type: string
+    format: uri
+  trigger_word:
+    type: string
+    description: Character trigger word
+  generation_settings:
+    $ref: ./FluxGenerationSettings.yaml

@@ -1,0 +1,10 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "catch2_property_tests",
+    srcs = ["catch2_property_tests.cpp"],
+    deps = [
+        "@pkg_config//:catch2",
+        "@pkg_config//:catch2_with_main",
+    ],
+)

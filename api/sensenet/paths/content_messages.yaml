@@ -1,0 +1,80 @@
+post:
+  tags:
+    - Content
+  summary: Create Content Session Message
+  description: >
+    Send a message for content generation. If sessionId is provided, adds message to existing session. If sessionId is null/omitted, creates a new session with the provided start configuration.
+
+    The response returns immediately with a requestId and status 'generating'.  Use GET /content/messages/{messageId} to poll for completion.
+
+  operationId: sendContentMessage
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ContentMessageRequest.yaml
+        examples:
+          new_profile_session:
+            summary: Create new profile session
+            value:
+              start:
+                profileId: "123e4567-e89b-12d3-a456-426614174000"
+              prompt: "Create a morning workout motivation post"
+              generationParams:
+                imageSize: "landscape_4_3"
+                numImages: 2
+          new_session_with_image:
+            summary: Create new session with reference image
+            value:
+              start:
+                profileId: "123e4567-e89b-12d3-a456-426614174000"
+                assetId: "456e7890-e89b-12d3-a456-426614174001"
+              prompt: "Make this more colorful and add sunset vibes"
+          continue_session:
+            summary: Continue existing session
+            value:
+              sessionId: "123e4567-e89b-12d3-a456-426614174000"
+              prompt: "Now make it more minimalist"
+          reset_context:
+            summary: Reset to base session context
+            value:
+              sessionId: "123e4567-e89b-12d3-a456-426614174000"
+              prompt: "Create a completely different style"
+              resetContext: true
+  responses:
+    '200':
+      description: Message created and generation started
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ContentMessageResponse.yaml
+          examples:
+            new_session_created:
+              summary: New session created with generating message
+              value:
+                message:
+                  id: "789e1234-e89b-12d3-a456-426614174002"
+                  sessionId: "123e4567-e89b-12d3-a456-426614174000"
+                  prompt: "Create a morning workout motivation post"
+                  resetContext: false
+                  requestId: "abc12345-e89b-12d3-a456-426614174003"
+                  createdAt: "2024-01-15T10:30:00Z"
+                  status: "generating"
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '422':
+      description: Invalid session configuration
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Error.yaml
+          examples:
+            missing_profile_id:
+              summary: Missing profileId for character session
+              value:
+                error: "profileId is required to start a new session"
+    '429':
+      $ref: ../components/responses/RateLimited.yaml

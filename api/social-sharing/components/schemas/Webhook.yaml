@@ -1,0 +1,17 @@
+allOf:
+  - $ref: ./WebhookResponse.yaml
+  - type: object
+    properties:
+      lastTriggered:
+        type:
+          - string
+          - 'null'
+        format: date-time
+      failureCount:
+        type: integer
+      status:
+        type: string
+        enum:
+          - active
+          - paused
+          - failed

@@ -1,0 +1,6 @@
+allOf:
+  - $ref: ./JobStatusResponse.yaml
+  - type: object
+    properties:
+      result:
+        $ref: ./ContentGenerationResult.yaml

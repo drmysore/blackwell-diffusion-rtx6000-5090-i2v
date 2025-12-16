@@ -1,0 +1,25 @@
+type: object
+properties:
+  likes:
+    type: array
+    items:
+      $ref: ./PostLike.yaml
+    description: List of post likes
+  total:
+    type: integer
+    description: Total number of likes for this post
+  page:
+    type: integer
+    description: Current page number
+  limit:
+    type: integer
+    description: Number of likes per page
+  hasMore:
+    type: boolean
+    description: Whether there are more likes available
+required:
+  - likes
+  - total
+  - page
+  - limit
+  - hasMore

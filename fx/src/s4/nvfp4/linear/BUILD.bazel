@@ -1,0 +1,70 @@
+load("@rules_cuda//cuda:defs.bzl", "cuda_library")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("//bzl:pybind11.bzl", "pybind11_extension")
+
+# CUDA kernel implementation
+cuda_library(
+    name = "kernel",
+    srcs = ["kernel.cu"],
+    hdrs = ["kernel.cuh"],
+    copts = [
+        "-Xcompiler=-fPIC",
+        "--expt-relaxed-constexpr",
+        "-std=c++20",
+    ],
+    deps = [
+        "@pkg_config//:cuda",
+        "@pkg_config//:libtorch",
+    ],
+    alwayslink = True,
+)
+
+# Tensor abstraction
+cc_library(
+    name = "tensor",
+    srcs = ["tensor.cpp"],
+    hdrs = ["tensor.h"],
+    copts = ["-std=c++20"],
+    deps = [
+        ":kernel",
+        "@pkg_config//:libtorch",
+    ],
+)
+
+# Python bindings for the whole module
+pybind11_extension(
+    name = "nvfp4",
+    srcs = ["bindings.cpp"],  # We'll create this
+    deps = [
+        ":kernel",
+        ":tensor",
+        "//src/s4/nvfp4/linear",  # Reference the linear subdirectory
+        "@pkg_config//:libtorch_python",
+    ],
+)
+
+# Export for other packages
+cc_library(
+    name = "nvfp4_linear_cc",
+    hdrs = [
+        # "kernel.cuh",
+        # "tensor.h",
+    ],
+    srcs = [
+        "nvfp4_linear.cpp",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+       "@pkg_config//:cuda",
+    ],
+)
+
+py_binary(
+    name="nvfp4_gemm_runner",
+    srcs=[
+        "nvfp4_gemm_runner.py",
+    ],
+    deps = [
+        "nvfp4_linear_cc",
+    ],
+)

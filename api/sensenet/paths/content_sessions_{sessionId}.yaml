@@ -1,0 +1,55 @@
+get:
+  tags:
+    - Content
+  summary: Get Content Session
+  description: Get details of a specific content generation session
+  operationId: getContentSession
+  parameters:
+    - name: sessionId
+      in: path
+      description: Session ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Session retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ContentSession.yaml
+          examples:
+            basic_session:
+              summary: Basic content session
+              value:
+                id: "sess-1111-2222-3333-444444444444"
+                profileId: "123e4567-e89b-12d3-a456-426614174000"
+                start:
+                  profileId: "123e4567-e89b-12d3-a456-426614174000"
+                  imageAssetId: "456e7890-e89b-12d3-a456-426614174001"
+                createdAt: "2024-01-15T10:30:00Z"
+                updatedAt: "2024-01-15T11:45:00Z"
+                messageCount: 5
+                lastAssetId: "789e1234-e89b-12d3-a456-426614174002"
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Content
+  summary: Delete Content Session
+  description: Delete a content generation session and all its messages
+  operationId: deleteContentSession
+  parameters:
+    - name: sessionId
+      in: path
+      description: Session ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '204':
+      description: Session deleted successfully
+    '404':
+      $ref: ../components/responses/NotFound.yaml

@@ -1,0 +1,9 @@
+type: object
+properties:
+  platformPosts:
+    type: array
+    items:
+      $ref: ./PlatformPost.yaml
+    description: List of platform-specific posts
+  pagination:
+    $ref: ./Pagination.yaml

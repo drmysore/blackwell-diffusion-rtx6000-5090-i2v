@@ -1,0 +1,16 @@
+type: object
+properties:
+  job_id:
+    type: string
+  generated_images:
+    type: array
+    items:
+      $ref: ./GeneratedImage.yaml
+  prompt_used:
+    type: string
+  generation_time_seconds:
+    type: number
+  model_used:
+    type: string
+  settings_used:
+    $ref: ./FluxGenerationSettings.yaml

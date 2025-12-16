@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    type: string
+    description: Social sharing post ID
+  status:
+    $ref: ./PostStatus.yaml
+  created:
+    type: string
+    format: date-time
+  scheduleDate:
+    type: string
+    format: date-time
+  post:
+    type: string
+  platforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+  mediaUrls:
+    type: array
+    items:
+      type: string
+      format: uri
+  postIds:
+    type: array
+    items:
+      $ref: ./PostId.yaml
+  errors:
+    type: array
+    items:
+      $ref: ./ErrorDetail.yaml

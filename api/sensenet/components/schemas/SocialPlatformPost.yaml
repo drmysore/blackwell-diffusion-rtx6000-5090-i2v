@@ -1,0 +1,19 @@
+type: object
+properties:
+  platform:
+    type: string
+    enum: ["instagram", "tiktok", "twitter", "facebook", "youtube"]
+    description: Social media platform
+  caption:
+    type: string
+    description: Platform-specific caption (overrides main caption)
+    example: "💪 Morning workout vibes! #fitness #motivation"
+  assetIds:
+    type: array
+    items:
+      type: string
+      format: uuid
+    description: Platform-specific asset IDs (overrides main assetIds)
+    example: ["789e1234-e89b-12d3-a456-426614174002"]
+required:
+  - platform

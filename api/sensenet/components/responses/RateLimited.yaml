@@ -1,0 +1,9 @@
+description: Rate limit exceeded
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    example:
+      error: RATE_LIMITED
+      message: Too many requests, please try again later
+      timestamp: '2024-01-01T00:00:00Z'

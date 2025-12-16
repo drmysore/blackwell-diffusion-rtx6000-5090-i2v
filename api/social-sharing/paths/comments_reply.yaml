@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Comments
+  summary: Reply to a comment
+  description: Add a reply to an existing comment
+  operationId: replyToComment
+  parameters:
+    - $ref: ../components/parameters/ProfileKeyHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ReplyCommentRequest.yaml
+  responses:
+    '200':
+      description: Reply posted successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CommentResponse.yaml

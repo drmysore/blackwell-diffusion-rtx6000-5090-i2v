@@ -1,0 +1,9 @@
+type: object
+required:
+  - platform
+  - authToken
+properties:
+  platform:
+    $ref: ./SocialPlatform.yaml
+  authToken:
+    type: string

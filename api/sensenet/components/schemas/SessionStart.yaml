@@ -1,0 +1,8 @@
+type: object
+properties:
+  #todo(arslan): change to more unambiguous name
+  assetId:
+    type: string
+    format: uuid
+    description: Optional image asset to use as base for content generation
+    example: "456e7890-e89b-12d3-a456-426614174001"

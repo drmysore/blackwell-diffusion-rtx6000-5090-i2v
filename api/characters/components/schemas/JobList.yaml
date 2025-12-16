@@ -1,0 +1,12 @@
+type: object
+properties:
+  jobs:
+    type: array
+    items:
+      $ref: ./JobStatusResponse.yaml
+  total:
+    type: integer
+  limit:
+    type: integer
+  offset:
+    type: integer

@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Character Pipeline API v2
+  description: >
+    **Prompt-Centric Character Pipeline API**
+
+
+    A microservices architecture for hyper-realistic character content generation.
+
+    Each service is completely independent and focused on its core responsibility.
+
+
+    **Key Architectural Changes:**
+
+    - Character creation handled by external system
+
+    - Character attributes only used for prompt generation
+
+    - Image generation services take minimal required inputs
+
+    - System prompt management for product team control
+
+    - No pipeline orchestration - true service independence
+
+
+    **Core Services:**
+
+    1. **Prompt Generation** - Convert character attributes to optimized prompts
+
+    2. **System Prompt Management** - Product team prompt control
+
+    3. **Headshot Generation** - Generate initial character headshots
+
+    4. **Dataset Generation** - Create training datasets (batch or individual)
+
+    5. **LoRA Training** - Train character-specific LoRA models
+
+    6. **Content Generation** - Generate final content with trained LoRAs
+
+  version: 2.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://api.character-pipeline.com/v2
+    description: Production server
+  - url: https://staging-api.character-pipeline.com/v2
+    description: Staging server
+  - url: http://127.0.0.1:8000/v2
+    description: Local development server
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+tags:
+  - name: content
+    description: Final content generation
+  - name: datasets
+    description: Training dataset generation
+  - name: files
+    description: File upload and download
+  - name: headshots
+    description: Initial character headshot generation
+  - name: jobs
+    description: Async job management
+  - name: prompts
+    description: Prompt generation and optimization
+  - name: system-prompts
+    description: System prompt management for product team
+  - name: training
+    description: LoRA model training
+paths:
+  /prompts/generate:
+    $ref: paths/prompts_generate.yaml
+  /system-prompts:
+    $ref: paths/system-prompts.yaml
+  /system-prompts/{promptId}:
+    $ref: paths/system-prompts_{promptId}.yaml
+  /headshots/generate:
+    $ref: paths/headshots_generate.yaml
+  /headshots/jobs/{jobId}:
+    $ref: paths/headshots_jobs_{jobId}.yaml
+  /datasets/generate-batch:
+    $ref: paths/datasets_generate-batch.yaml
+  /datasets/generate-single:
+    $ref: paths/datasets_generate-single.yaml
+  /datasets/jobs/{jobId}:
+    $ref: paths/datasets_jobs_{jobId}.yaml
+  /training/submit:
+    $ref: paths/training_submit.yaml
+  /training/jobs/{jobId}:
+    $ref: paths/training_jobs_{jobId}.yaml
+  /content/generate:
+    $ref: paths/content_generate.yaml
+  /content/jobs/{jobId}:
+    $ref: paths/content_jobs_{jobId}.yaml
+  /jobs:
+    $ref: paths/jobs.yaml
+  /jobs/{jobId}:
+    $ref: paths/jobs_{jobId}.yaml
+  /files/upload:
+    $ref: paths/files_upload.yaml
+  /files/{fileId}:
+    $ref: paths/files_{fileId}.yaml
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

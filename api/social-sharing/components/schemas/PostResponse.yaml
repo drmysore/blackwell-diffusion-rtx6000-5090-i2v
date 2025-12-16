@@ -1,0 +1,24 @@
+type: object
+properties:
+  status:
+    $ref: ./PostStatus.yaml
+  errors:
+    type: array
+    items:
+      $ref: ./ErrorDetail.yaml
+  postIds:
+    type: array
+    items:
+      $ref: ./PostId.yaml
+  id:
+    type: string
+    description: Social sharing post ID
+  refId:
+    type: string
+    description: Your reference ID if provided
+  scheduleDate:
+    type: string
+    format: date-time
+  post:
+    type: string
+    description: Post content

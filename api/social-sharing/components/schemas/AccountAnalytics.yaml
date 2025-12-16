@@ -1,0 +1,30 @@
+type: object
+properties:
+  followers:
+    type: integer
+    description: Total follower count
+  followersChange:
+    type: integer
+    description: Change in followers
+  impressions:
+    type: integer
+  reach:
+    type: integer
+  engagementRate:
+    type: number
+    format: float
+  demographics:
+    type: object
+    properties:
+      age:
+        type: object
+        additionalProperties:
+          type: number
+      gender:
+        type: object
+        additionalProperties:
+          type: number
+      location:
+        type: object
+        additionalProperties:
+          type: number

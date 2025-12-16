@@ -1,0 +1,27 @@
+post:
+  tags:
+    - datasets
+  summary: Generate single dataset image
+  description: |
+    Generate individual dataset image with specific prompt and reference.
+
+    **Use for**: Custom poses, specific variations, testing
+    **Model**: flux-kontext (reference image support)
+  operationId: generateDatasetSingle
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DatasetSingleRequest.yaml
+  responses:
+    '200':
+      description: Single image generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DatasetSingleResult.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

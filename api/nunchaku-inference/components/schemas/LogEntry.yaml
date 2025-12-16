@@ -1,0 +1,22 @@
+type: object
+properties:
+  message:
+    type: string
+    description: Log message content
+  level:
+    type: string
+    enum:
+      - STDERR
+      - STDOUT
+      - ERROR
+      - INFO
+      - WARN
+      - DEBUG
+    description: Log severity level
+  source:
+    type: string
+    description: Source of the log
+  timestamp:
+    type: string
+    format: date-time
+    description: Timestamp of the log entry

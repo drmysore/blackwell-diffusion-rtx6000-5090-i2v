@@ -1,0 +1,12 @@
+type: object
+properties:
+  facebook:
+    $ref: ./AccountAnalytics.yaml
+  instagram:
+    $ref: ./AccountAnalytics.yaml
+  twitter:
+    $ref: ./AccountAnalytics.yaml
+  linkedin:
+    $ref: ./AccountAnalytics.yaml
+  youtube:
+    $ref: ./AccountAnalytics.yaml

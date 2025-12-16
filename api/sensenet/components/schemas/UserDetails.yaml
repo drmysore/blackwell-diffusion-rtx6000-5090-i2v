@@ -1,0 +1,14 @@
+allOf:
+  - $ref: ./User.yaml
+  - type: object
+    properties:
+      avatar:
+        type: string
+        format: uri
+        description: User avatar URL
+      stats:
+        type: object
+        properties:
+          profilesCreated:
+            type: integer
+            description: Number of profiles created by user

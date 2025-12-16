@@ -1,0 +1,14 @@
+allOf:
+  - $ref: ./ApiError.yaml
+  - type: object
+    properties:
+      validation_errors:
+        type: array
+        items:
+          type: object
+          properties:
+            field:
+              type: string
+            error:
+              type: string
+            value: {}

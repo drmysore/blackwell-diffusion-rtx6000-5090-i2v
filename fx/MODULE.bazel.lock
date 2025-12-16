@@ -1,0 +1,80 @@
+{
+  "lockFileVersion": 13,
+  "registryFileHashes": {},
+  "selectedYankedVersions": {},
+  "moduleExtensions": {
+    "//bzl:rules_pkg_config.bzl%pkg_config": {
+      "general": {
+        "bzlTransitiveDigest": "glFzHJnr8Z2+x6fsjv2MLbqWI7feewmazltwZCt6clY=",
+        "usagesDigest": "riVGFKk2J54DfgJmdN/YcSxgH/6uRPW4Zew/FHVEIzE=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "pkg_config": {
+            "bzlFile": "@@//bzl:rules_pkg_config.bzl",
+            "ruleClassName": "pkg_config_repository",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
+    "@@apple_support~//crosstool:setup.bzl%apple_cc_configure_extension": {
+      "general": {
+        "bzlTransitiveDigest": "PjIds3feoYE8SGbbIq2SFTZy3zmxeO2tQevJZNDo7iY=",
+        "usagesDigest": "+hz7IHWN6A1oVJJWNDB6yZRG+RYhF76wAYItpAeIUIg=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "local_config_apple_cc_toolchains": {
+            "bzlFile": "@@apple_support~//crosstool:setup.bzl",
+            "ruleClassName": "_apple_cc_autoconf_toolchains",
+            "attributes": {}
+          },
+          "local_config_apple_cc": {
+            "bzlFile": "@@apple_support~//crosstool:setup.bzl",
+            "ruleClassName": "_apple_cc_autoconf",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "apple_support~",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    },
+    "@@rules_cuda~//cuda:extensions.bzl%toolchain": {
+      "general": {
+        "bzlTransitiveDigest": "tlVTanG5cx6j8FNWg/xoYr2CT5V+SULSpWU1/bZXN80=",
+        "usagesDigest": "2YMnSwcCoVOMyGWCUSyyxpHYxLNt1hL1QCrc1AT2M5c=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "cuda": {
+            "bzlFile": "@@rules_cuda~//cuda/private:repositories.bzl",
+            "ruleClassName": "cuda_toolkit",
+            "attributes": {
+              "components_mapping": {},
+              "nvcc_version": "",
+              "toolkit_path": "/nix/store/p8djf0bci1cqzw1w1pzgsmr38sqiz2l2-libcuda",
+              "version": "/nix/store/p8djf0bci1cqzw1w1pzgsmr38sqiz2l2-libcuda"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_cuda~",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    }
+  }
+}

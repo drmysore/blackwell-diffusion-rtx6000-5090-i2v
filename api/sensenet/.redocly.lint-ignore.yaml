@@ -1,0 +1,22 @@
+# This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
+# See https://redocly.com/docs/cli/ for more information.
+sensenet.openapi.yaml:
+  no-server-example.com:
+    - '#/servers/2/url'
+ayrshare.yaml:
+  operation-4xx-response:
+    - '#/paths/~1history/get/responses'
+    - '#/paths/~1analytics~1post/get/responses'
+    - '#/paths/~1analytics~1social/get/responses'
+    - '#/paths/~1comments~1{id}/get/responses'
+    - '#/paths/~1comments~1{id}/delete/responses'
+    - '#/paths/~1comments/post/responses'
+    - '#/paths/~1comments~1reply/post/responses'
+    - '#/paths/~1media~1upload/post/responses'
+    - '#/paths/~1user/get/responses'
+    - '#/paths/~1profiles/get/responses'
+    - '#/paths/~1profiles~1{profileKey}/delete/responses'
+    - '#/paths/~1profiles~1generateJWT/post/responses'
+    - '#/paths/~1links/post/responses'
+    - '#/paths/~1links~1{id}~1analytics/get/responses'
+    - '#/paths/~1hashtags/post/responses'

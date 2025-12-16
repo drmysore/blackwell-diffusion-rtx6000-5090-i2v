@@ -1,0 +1,25 @@
+type: object
+properties:
+  profileId:
+    type: string
+    format: uuid
+    description: Profile ID that will own this post
+  caption:
+    type: string
+    minLength: 1
+    description: Text content/caption for the post
+  assetIds:
+    type: array
+    items:
+      type: string
+      format: uuid
+    minItems: 1
+    description: List of content asset IDs to include in the post
+  scheduledFor:
+    type: string
+    format: date-time
+    description: Optional scheduled publish time (if not provided, post remains in draft)
+required:
+  - profileId
+  - caption
+  - assetIds

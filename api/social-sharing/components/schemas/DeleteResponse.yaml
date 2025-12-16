@@ -1,0 +1,9 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - success
+      - error
+  message:
+    type: string

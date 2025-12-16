@@ -1,0 +1,18 @@
+get:
+  operationId: streamFluxDevStatus
+  summary: Stream status updates for FLUX.1 dev request
+  tags:
+    - FLUX Models
+  parameters:
+    - $ref: ../components/parameters/RequestId.yaml
+    - $ref: ../components/parameters/Logs.yaml
+  responses:
+    '200':
+      description: Server-sent event stream
+      content:
+        text/event-stream:
+          schema:
+            type: string
+            description: SSE stream of status updates
+    '404':
+      $ref: ../components/responses/NotFound.yaml

@@ -1,0 +1,23 @@
+get:
+  tags:
+    - Content
+  summary: Get Content Assets
+  description: Get details of a specific content asset
+  operationId: getContentAsset
+  parameters:
+    - name: assetId
+      in: path
+      description: Asset ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: Asset retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ContentAsset.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

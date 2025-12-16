@@ -1,0 +1,8 @@
+type: object
+properties:
+  holders:
+    type: array
+    items:
+      $ref: ./Holder.yaml
+  pagination:
+    $ref: ./Pagination.yaml

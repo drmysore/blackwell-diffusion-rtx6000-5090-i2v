@@ -1,0 +1,23 @@
+type: object
+required:
+  - prompt
+properties:
+  prompt:
+    type: string
+    minLength: 10
+    description: Optimized prompt from prompt service
+  num_images:
+    type: integer
+    minimum: 1
+    maximum: 10
+    default: 3
+  generation_settings:
+    $ref: ./FluxGenerationSettings.yaml
+  loras:
+    type: array
+    items:
+      $ref: ./LoRAConfig.yaml
+    description: LoRA configurations (defaults to AntiBlur)
+  webhook_url:
+    type: string
+    format: uri

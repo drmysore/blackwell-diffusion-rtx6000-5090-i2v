@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "hello-abseil",
+    srcs = [
+        "main.cpp",
+    ],
+    deps = [
+        "@pkg_config//:abseil",
+        "@pkg_config//:spdlog",
+    ],
+)

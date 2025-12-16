@@ -1,0 +1,21 @@
+type: object
+required:
+  - profileKey
+properties:
+  profileKey:
+    type: string
+    description: Profile key to generate JWT for
+  domain:
+    type: string
+    description: Your domain for SSO
+  privateKey:
+    type: string
+    description: Your private key for JWT signing
+  redirectUrl:
+    type: string
+    format: uri
+    description: URL to redirect after linking
+  expiresIn:
+    type: integer
+    default: 3600
+    description: JWT expiration in seconds

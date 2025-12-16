@@ -1,0 +1,16 @@
+type: object
+required:
+  - id
+  - platforms
+  - comment
+properties:
+  id:
+    type: string
+    description: Social sharing post ID
+  platforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
+  comment:
+    type: string
+    maxLength: 5000

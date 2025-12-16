@@ -1,0 +1,34 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Content asset identifier
+  assetHandle:
+    type: string
+    description: Handle or URL of the content asset (e.g., image, video)
+    example: Y29udGVudHMvYWJjZDEyMzQvaW1hZ2UucG5n
+  height:
+    type: integer
+    description: Height of the asset in pixels (if applicable)
+    example: 1080
+  width:
+    type: integer
+    description: Width of the asset in pixels (if applicable)
+    example: 1920
+  nsfw:
+    type: boolean
+    description: Indicates if the asset is marked as NSFW (Not Safe For Work)
+    example: false
+  createdAt:
+    type: string
+    format: date-time
+    description: When the asset was linked to the post
+  updatedAt:
+    type: string
+    format: date-time
+    description: When the asset link was last updated
+required:
+  - id
+  - createdAt
+  - updatedAt

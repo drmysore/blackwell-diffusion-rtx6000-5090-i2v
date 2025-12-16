@@ -1,0 +1,49 @@
+post:
+  tags:
+    - datasets
+  summary: Generate dataset (batch mode)
+  description: >
+    Generate complete training dataset using character attributes and reference image.
+
+
+    **Recommended approach** - generates all dataset images in single job.
+
+    **Model**: flux-kontext (supports reference images for consistency)
+
+    **LoRAs**: AntiBlur for consistency across dataset
+
+  operationId: generateDatasetBatch
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DatasetBatchRequest.yaml
+  callbacks:
+    onCompletion:
+      '{$request.body#/webhook_url}':
+        post:
+          tags:
+            - datasets
+          summary: Dataset generation webhook
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/DatasetGenerationResult.yaml
+          responses:
+            '200':
+              description: Webhook received successfully
+            '400':
+              description: Invalid webhook payload
+  responses:
+    '202':
+      description: Dataset generation job started
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JobResponse.yaml
+    '400':
+      $ref: ../components/responses/ValidationError.yaml
+    '500':
+      $ref: ../components/responses/InternalError.yaml

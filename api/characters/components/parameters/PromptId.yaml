@@ -1,0 +1,6 @@
+name: promptId
+in: path
+required: true
+schema:
+  type: string
+description: System prompt ID

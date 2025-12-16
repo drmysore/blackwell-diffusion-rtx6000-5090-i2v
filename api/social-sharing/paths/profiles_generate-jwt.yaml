@@ -1,0 +1,19 @@
+post:
+  tags:
+    - Profiles
+  summary: Generate JWT for social linking
+  description: Generate a JWT URL for secure social account linking
+  operationId: generateJWT
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GenerateJWTRequest.yaml
+  responses:
+    '200':
+      description: JWT generated successfully
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/JWTResponse.yaml

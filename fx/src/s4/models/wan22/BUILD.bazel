@@ -1,0 +1,19 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "megafp4",
+    srcs = [
+        "megafp4.py",
+    ],
+    data = [
+    ],
+)
+
+py_binary(
+    name = "megaupload",
+    srcs = [
+        "megaupload.py",
+    ],
+    data = [
+    ],
+)
